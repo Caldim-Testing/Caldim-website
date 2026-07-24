@@ -310,7 +310,7 @@ export const Navbar: React.FC = () => {
                       )}
                     </AnimatePresence>
 
-                    {/* Mega Dropdown Panel for Products */}
+                    {/* Mega Dropdown only */}
                     <AnimatePresence>
                       {item.isMega && isActive && (
                         <motion.div
