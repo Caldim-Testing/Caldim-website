@@ -206,7 +206,7 @@ export const AiAgentsSection: React.FC = () => {
 
     const animate = () => {
       if (!isPaused && !activeId) {
-        scrollContainer.scrollLeft += 2; // Increased speed (was 1)
+        scrollContainer.scrollLeft += 1;
         // Since we render agents twice, jump back to start when we reach halfway
         if (scrollContainer.scrollLeft >= scrollContainer.scrollWidth / 2) {
           scrollContainer.scrollLeft = 0;
@@ -258,7 +258,7 @@ export const AiAgentsSection: React.FC = () => {
 
         {/* Hybrid Marquee Carousel (Auto + Manual) */}
         <div 
-          className="relative w-full max-w-7xl mx-auto px-4 md:px-12 group"
+          className="relative w-full max-w-7xl mx-auto px-2 md:px-8 group"
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
         >
@@ -266,23 +266,23 @@ export const AiAgentsSection: React.FC = () => {
           {/* Navigation Controls */}
           <button 
             onClick={scrollLeftBtn}
-            className="absolute left-0 top-1/2 -translate-y-1/2 z-20 w-12 h-12 bg-white border border-slate-200 rounded-full shadow-lg flex items-center justify-center text-[var(--navy)] hover:bg-slate-50 transition-all opacity-0 group-hover:opacity-100 hidden md:flex"
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-20 w-11 h-11 bg-white border border-slate-200 rounded-full shadow-lg flex items-center justify-center text-[var(--navy)] hover:bg-blue-50 hover:border-blue-300 transition-all opacity-0 group-hover:opacity-100 hidden md:flex"
             aria-label="Scroll left"
           >
-            <ChevronLeft size={24} />
+            <ChevronLeft size={22} />
           </button>
 
           <button 
             onClick={scrollRightBtn}
-            className="absolute right-0 top-1/2 -translate-y-1/2 z-20 w-12 h-12 bg-white border border-slate-200 rounded-full shadow-lg flex items-center justify-center text-[var(--navy)] hover:bg-slate-50 transition-all opacity-0 group-hover:opacity-100 hidden md:flex"
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-20 w-11 h-11 bg-white border border-slate-200 rounded-full shadow-lg flex items-center justify-center text-[var(--navy)] hover:bg-blue-50 hover:border-blue-300 transition-all opacity-0 group-hover:opacity-100 hidden md:flex"
             aria-label="Scroll right"
           >
-            <ChevronRight size={24} />
+            <ChevronRight size={22} />
           </button>
 
-          {/* Fading Edges */}
-          <div className="absolute top-0 bottom-0 left-12 w-24 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none hidden md:block" />
-          <div className="absolute top-0 bottom-0 right-12 w-24 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none hidden md:block" />
+          {/* Fading Edges at outer container bounds */}
+          <div className="absolute top-0 bottom-0 left-0 w-16 bg-gradient-to-r from-white via-white/80 to-transparent z-10 pointer-events-none hidden md:block" />
+          <div className="absolute top-0 bottom-0 right-0 w-16 bg-gradient-to-l from-white via-white/80 to-transparent z-10 pointer-events-none hidden md:block" />
           
           <div 
             ref={scrollRef}
@@ -293,23 +293,23 @@ export const AiAgentsSection: React.FC = () => {
             {[...agents, ...agents].map((agent, index) => (
               <div
                 key={`${agent.id}-${index}`}
-                className="w-[82vw] sm:w-[50vw] md:w-[33vw] max-w-[360px] shrink-0 px-2 sm:px-4 flex justify-center"
+                className="w-[82vw] sm:w-[50vw] md:w-[33vw] max-w-[340px] shrink-0 px-3 flex justify-center"
               >
                 <div onClick={() => handleStartAgent(agent.id)} className="flex flex-col items-center group cursor-pointer w-full">
                   {/* Agent Core Hologram */}
-                  <div className="relative w-56 h-56 sm:w-64 sm:h-64 mb-8 flex items-center justify-center">
-                    {/* Center Glow (Radial burst on white) */}
-                    <div className={`absolute inset-4 rounded-full ${agent.bgGlow} blur-2xl transition-all duration-500 group-hover:scale-125 opacity-70 group-hover:opacity-100`} />
+                  <div className="relative w-52 h-52 sm:w-60 sm:h-60 mb-6 flex items-center justify-center">
+                    {/* Center Glow */}
+                    <div className={`absolute inset-4 rounded-full ${agent.bgGlow} blur-xl transition-all duration-500 group-hover:scale-110 opacity-60 group-hover:opacity-90`} />
 
-                    {/* Rotating Tech Rings (Crisp and colorful against white) */}
-                    <div className={`absolute inset-0 rounded-full border-2 border-dashed ${agent.borderClass} ${agent.shadowClass} animate-[spin_20s_linear_infinite] transition-all duration-500`} />
-                    <div className={`absolute inset-6 rounded-full border-2 border-dotted ${agent.borderClass} ${agent.shadowClass} opacity-80 animate-[spin_15s_linear_infinite_reverse] transition-all duration-500`} />
-                    <div className={`absolute inset-12 rounded-full border border-solid ${agent.borderClass} opacity-60 animate-[spin_10s_linear_infinite] transition-all duration-500`} />
+                    {/* Sleek Tech Badge Rings (Glow & rotate gracefully on hover instead of endless buffering spin) */}
+                    <div className={`absolute inset-0 rounded-full border-2 border-dashed ${agent.borderClass} ${agent.shadowClass} opacity-70 group-hover:opacity-100 group-hover:rotate-45 transition-all duration-700`} />
+                    <div className={`absolute inset-5 rounded-full border-2 border-dotted ${agent.borderClass} opacity-60 group-hover:opacity-100 group-hover:-rotate-45 transition-all duration-700`} />
+                    <div className={`absolute inset-10 rounded-full border border-solid ${agent.borderClass} opacity-40 group-hover:opacity-80 transition-all duration-500`} />
                     
                     {/* The Button */}
                     <button 
-                      className="relative z-10 bg-white border-2 border-slate-200 rounded-full py-3 px-6 flex items-center gap-2.5 text-sm font-800 tracking-wide text-[var(--navy)] group-hover:border-[var(--accent)] group-hover:bg-blue-50/50 transition-all shadow-md group-hover:shadow-xl group-hover:scale-105"
-                      style={{ boxShadow: `0 4px 20px ${agent.color}35` }}
+                      className="relative z-10 bg-white border-2 border-slate-200 rounded-full py-3 px-6 flex items-center gap-2.5 text-sm font-800 tracking-wide text-[var(--navy)] group-hover:border-[var(--accent)] group-hover:bg-blue-50/80 transition-all shadow-md group-hover:shadow-xl group-hover:scale-105"
+                      style={{ boxShadow: `0 4px 20px ${agent.color}30` }}
                     >
                       <Play size={14} style={{ color: agent.color, fill: agent.color }} />
                       {agent.action}
