@@ -212,36 +212,36 @@ export const Navbar: React.FC = () => {
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-50 pointer-events-none px-4 md:px-6 flex justify-center">
+      <header className="fixed top-0 left-0 right-0 z-50 pointer-events-none px-2 sm:px-4 md:px-6 flex justify-center">
         <nav
-          className={`w-full max-w-6xl mt-4 md:mt-6 pointer-events-auto rounded-full transition-all duration-500 border ${
+          className={`w-full max-w-6xl mt-2 sm:mt-4 md:mt-6 pointer-events-auto rounded-full transition-all duration-500 border ${
             scrolled
               ? "bg-[#071B34]/95 border-white/20 shadow-[0_8px_32px_rgba(7,27,52,0.8)] backdrop-blur-xl py-1"
-              : "bg-[#071B34]/80 border-white/10 shadow-2xl backdrop-blur-md py-2"
+              : "bg-[#071B34]/80 border-white/10 shadow-2xl backdrop-blur-md py-1.5 sm:py-2"
           }`}
           role="navigation"
           aria-label="Main navigation"
         >
-          <div className="px-6 md:px-8 flex items-center justify-between h-14">
+          <div className="px-3 sm:px-6 md:px-8 flex items-center justify-between h-12 sm:h-14">
             
             {/* Brand Logo - White/Blue theme */}
             <Link
               href="/"
               onClick={handleLogoClick}
-              className="flex items-center gap-3 font-display font-900 text-xl tracking-tight text-white shrink-0 group"
+              className="flex items-center gap-2 sm:gap-3 font-display font-900 text-base sm:text-xl tracking-tight text-white shrink-0 group"
               aria-label="CALDIM home"
             >
-              <div className="relative h-8 w-12 flex items-center justify-center shrink-0">
+              <div className="relative h-7 w-9 sm:h-8 sm:w-12 flex items-center justify-center shrink-0">
                 <div className="absolute inset-0 bg-blue-600/20 rounded-full blur-md group-hover:bg-blue-500/40 transition-all duration-500" />
                 <img
                   src="/logo/image.png"
                   alt="CALDIM CD Logo"
-                  className="relative h-7 w-auto max-w-none object-contain transition-transform duration-500 group-hover:scale-110"
+                  className="relative h-6 sm:h-7 w-auto max-w-none object-contain transition-transform duration-500 group-hover:scale-110"
                 />
               </div>
               <span className="text-white group-hover:text-blue-100 transition-colors">
                 CALDIM{" "}
-                <span className="font-400 text-white">
+                <span className="font-400 text-white text-xs sm:text-base">
                   - DAS
                 </span>
               </span>
@@ -440,7 +440,7 @@ export const Navbar: React.FC = () => {
             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             exit={{ opacity: 0, y: -20, filter: "blur(10px)" }}
             transition={{ duration: 0.3, ease: "easeOut" }}
-            className="fixed inset-0 z-45 bg-[#020c1b]/95 backdrop-blur-2xl pt-28 px-6 pb-8 flex flex-col gap-8 lg:hidden overflow-y-auto"
+            className="fixed inset-0 z-45 bg-[#020c1b]/95 backdrop-blur-2xl pt-24 sm:pt-28 px-4 sm:px-6 pb-8 flex flex-col gap-6 lg:hidden max-h-[100dvh] overflow-y-auto"
           >
             <nav className="flex flex-col gap-2" aria-label="Mobile navigation">
               {navItems.map((item) => {

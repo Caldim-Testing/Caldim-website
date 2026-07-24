@@ -80,7 +80,7 @@ export default function AboutPage() {
 
               {/* Right Column: High-Contrast Dark Navy Stat Cards & Mission/Vision Cards */}
               <FadeUp delay={0.2} className="lg:col-span-5 flex flex-col justify-between gap-6 relative z-20">
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid-auto-fit-sm">
                   {[
                     { label: "Founded", value: "2016" },
                     { label: "Software Division", value: "2025" },

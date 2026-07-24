@@ -1,10 +1,10 @@
 {
   "pageViews": {
-    "/": 10,
-    "/about": 4,
+    "/": 27,
+    "/about": 8,
     "/services": 0,
     "/products": 0,
-    "/contact": 2,
+    "/contact": 4,
     "/industries": 2
   },
   "events": {
@@ -105,6 +105,121 @@
       "timestamp": "2026-07-17T04:58:23.913Z",
       "action": "Page View",
       "details": "/about"
+    },
+    {
+      "timestamp": "2026-07-17T06:36:09.994Z",
+      "action": "Page View",
+      "details": "/about"
+    },
+    {
+      "timestamp": "2026-07-17T06:37:44.902Z",
+      "action": "Page View",
+      "details": "/"
+    },
+    {
+      "timestamp": "2026-07-17T06:37:57.217Z",
+      "action": "Page View",
+      "details": "/"
+    },
+    {
+      "timestamp": "2026-07-17T06:40:09.642Z",
+      "action": "Page View",
+      "details": "/"
+    },
+    {
+      "timestamp": "2026-07-17T06:41:15.891Z",
+      "action": "Page View",
+      "details": "/contact"
+    },
+    {
+      "timestamp": "2026-07-17T06:41:45.412Z",
+      "action": "Page View",
+      "details": "/"
+    },
+    {
+      "timestamp": "2026-07-17T06:51:24.797Z",
+      "action": "Page View",
+      "details": "/"
+    },
+    {
+      "timestamp": "2026-07-17T07:00:31.710Z",
+      "action": "Page View",
+      "details": "/"
+    },
+    {
+      "timestamp": "2026-07-17T07:00:51.782Z",
+      "action": "Page View",
+      "details": "/about"
+    },
+    {
+      "timestamp": "2026-07-17T07:03:50.122Z",
+      "action": "Page View",
+      "details": "/about"
+    },
+    {
+      "timestamp": "2026-07-17T07:03:59.651Z",
+      "action": "Page View",
+      "details": "/"
+    },
+    {
+      "timestamp": "2026-07-17T07:05:21.329Z",
+      "action": "Page View",
+      "details": "/"
+    },
+    {
+      "timestamp": "2026-07-17T07:19:32.965Z",
+      "action": "Page View",
+      "details": "/"
+    },
+    {
+      "timestamp": "2026-07-17T08:21:43.054Z",
+      "action": "Page View",
+      "details": "/"
+    },
+    {
+      "timestamp": "2026-07-17T08:22:20.980Z",
+      "action": "Page View",
+      "details": "/"
+    },
+    {
+      "timestamp": "2026-07-20T08:15:40.989Z",
+      "action": "Page View",
+      "details": "/"
+    },
+    {
+      "timestamp": "2026-07-20T09:43:58.048Z",
+      "action": "Page View",
+      "details": "/"
+    },
+    {
+      "timestamp": "2026-07-20T09:47:50.614Z",
+      "action": "Page View",
+      "details": "/contact"
+    },
+    {
+      "timestamp": "2026-07-20T09:47:52.960Z",
+      "action": "Page View",
+      "details": "/"
+    },
+    {
+      "timestamp": "2026-07-20T09:49:34.462Z",
+      "action": "Page View",
+      "details": "/"
+    },
+    {
+      "timestamp": "2026-07-20T10:10:12.597Z",
+      "action": "Page View",
+      "details": "/about"
+    },
+    {
+      "timestamp": "2026-07-20T10:10:45.250Z",
+      "action": "Page View",
+      "details": "/"
+    },
+    {
+      "timestamp": "2026-07-24T09:53:42.608Z",
+      "action": "Page View",
+      "details": "/"
     }
   ]
 }

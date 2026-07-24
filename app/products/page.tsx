@@ -147,12 +147,12 @@ export default function ProductsPage() {
 
           <div className="container-wide relative z-10">
             
-            <div className="grid lg:grid-cols-12 gap-8 items-stretch">
+            <div className="grid lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
               
-              {/* Left Side: Dynamic Selector Panel (4 cols) */}
+              {/* Left Side: Dynamic Selector Panel (4 cols on desktop, horizontal scroll on mobile/tablet) */}
               <div className="lg:col-span-4 flex flex-col justify-between">
                 
-                <div className="flex flex-col gap-2 max-h-[780px] overflow-y-auto pr-2 custom-scrollbar">
+                <div className="flex lg:flex-col gap-2 overflow-x-auto lg:overflow-y-auto max-h-none lg:max-h-[780px] pb-2 lg:pb-0 pr-0 lg:pr-2 custom-scrollbar shrink-0">
                   {productsList.map((item) => {
                     const isSelected = item.id === selectedId;
                     const ItemIcon = getIconComponent(item.iconName);
@@ -161,7 +161,7 @@ export default function ProductsPage() {
                       <button
                         key={item.id}
                         onClick={() => setSelectedId(item.id)}
-                        className={`w-full text-left p-3 rounded-xl flex items-center justify-between border transition-all duration-300 group ${
+                        className={`min-w-[200px] sm:min-w-[240px] lg:min-w-0 lg:w-full text-left p-2.5 sm:p-3 rounded-xl flex items-center justify-between border transition-all duration-300 group shrink-0 ${
                           isSelected 
                             ? "bg-white/10 border-white/20 shadow-lg" 
                             : "bg-white/[0.02] border-white/5 hover:bg-white/[0.05] hover:border-white/10"
@@ -172,7 +172,7 @@ export default function ProductsPage() {
                       >
                         <div className="flex items-center gap-2.5 truncate">
                           <div 
-                            className="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 border border-white/10"
+                            className="w-8 h-8 sm:w-9 sm:h-9 rounded-lg flex items-center justify-center shrink-0 border border-white/10"
                             style={{ 
                               background: isSelected ? item.color : "rgba(255,255,255,0.05)",
                               color: isSelected ? "#fff" : item.color
@@ -190,7 +190,7 @@ export default function ProductsPage() {
                           </div>
                         </div>
 
-                        <ChevronRight size={14} className={`shrink-0 transition-transform ${isSelected ? "translate-x-1 text-white" : "text-white/30 group-hover:text-white group-hover:translate-x-0.5"}`} />
+                        <ChevronRight size={14} className={`hidden sm:block shrink-0 transition-transform ${isSelected ? "translate-x-1 text-white" : "text-white/30 group-hover:text-white group-hover:translate-x-0.5"}`} />
                       </button>
                     );
                   })}
@@ -243,7 +243,7 @@ export default function ProductsPage() {
                       </div>
 
                       {/* 16:9 CINEMATIC VIDEO & SCREEN RECORDING STAGE */}
-                      <div className="relative w-full min-h-[320px] sm:min-h-[400px] md:min-h-[480px] rounded-2xl bg-[#0A192F] border border-white/20 shadow-2xl overflow-hidden mb-7 group flex flex-col items-center justify-center text-center p-6 md:p-10">
+                      <div className="relative w-full aspect-video sm:min-h-[380px] md:min-h-[460px] rounded-2xl bg-[#0A192F] border border-white/20 shadow-2xl overflow-hidden mb-6 sm:mb-7 group flex flex-col items-center justify-center text-center p-4 sm:p-6 md:p-10">
                         
                         {isPlaying ? (
                           renderVideoPlayer(selectedProduct.videoUrl, selectedProduct.mediaTitle)

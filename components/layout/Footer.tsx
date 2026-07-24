@@ -39,10 +39,10 @@ export const Footer: React.FC = () => {
     <footer className="bg-[var(--navy)] text-white" aria-label="Site footer">
       <DataNodeDivider />
       {/* Main footer */}
-      <div className="container-wide py-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-12">
+      <div className="container-wide py-8 sm:py-12">
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 sm:gap-10 lg:gap-12">
           {/* Brand column */}
-          <div className="lg:col-span-2">
+          <div className="col-span-2 lg:col-span-2">
             <Link
               href="/"
               className="flex items-center gap-3 mb-6 font-display font-900 text-xl tracking-tight text-white group"

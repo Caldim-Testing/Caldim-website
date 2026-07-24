@@ -141,15 +141,15 @@ export const WarehouseManagementSimulator: React.FC = () => {
           </div>
 
           {/* Stepper (6 Stages) */}
-          <div className="py-6 border-b border-slate-100">
-            <div className="grid grid-cols-3 md:grid-cols-6 gap-3">
+          <div className="py-4 sm:py-6 border-b border-slate-100">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2 sm:gap-3">
               {stages.map((stage, idx) => {
                 const isPassed = activeProject.currentStage > idx;
                 const isActive = activeProject.currentStage === idx;
                 return (
-                  <div key={idx} className="flex flex-col items-center text-center">
+                  <div key={idx} className="flex flex-col items-center text-center p-1">
                     <div 
-                      className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all duration-300 border ${
+                      className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all duration-300 border ${
                         isPassed 
                           ? "bg-blue-600 border-blue-600 text-white" 
                           : isActive 
@@ -159,12 +159,12 @@ export const WarehouseManagementSimulator: React.FC = () => {
                     >
                       {isPassed ? <Check size={12} /> : idx + 1}
                     </div>
-                    <span className={`text-[9px] font-800 tracking-tight mt-2.5 leading-tight block ${
+                    <span className={`text-[9px] sm:text-[10px] font-800 tracking-tight mt-1.5 leading-tight block ${
                       isActive ? "text-blue-600 font-900" : isPassed ? "text-slate-800" : "text-slate-400"
                     }`}>
                       {stage.label}
                     </span>
-                    <span className="text-[7px] text-slate-400 font-600 block mt-0.5">{stage.action}</span>
+                    <span className="text-[7px] sm:text-[8px] text-slate-400 font-600 block mt-0.5">{stage.action}</span>
                   </div>
                 );
               })}
@@ -172,9 +172,9 @@ export const WarehouseManagementSimulator: React.FC = () => {
           </div>
 
           {/* Outputs */}
-          <div className="flex-1 py-6 flex flex-col gap-6">
+          <div className="flex-1 py-4 sm:py-6 flex flex-col gap-4 sm:gap-6">
             
-            <div className="flex-1 bg-slate-950 rounded-2xl p-4 border border-slate-800 font-mono text-[10px] sm:text-xs text-blue-400 min-h-[160px] max-h-[220px] overflow-y-auto flex flex-col gap-1.5 shadow-inner">
+            <div className="flex-1 bg-slate-950 rounded-2xl p-3 sm:p-4 border border-slate-800 font-mono text-[10px] sm:text-xs text-blue-400 min-h-[140px] max-h-[clamp(140px,25vh,240px)] overflow-y-auto flex flex-col gap-1.5 shadow-inner">
               <div className="text-slate-500 italic text-[9px] tracking-wider mb-1">
                 --- WAREHOUSE EVENT LOGS ---
               </div>

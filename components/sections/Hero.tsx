@@ -28,7 +28,7 @@ const HeroDashboard: React.FC = () => {
         initial={{ opacity: 0, y: 40, scale: 0.95 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ duration: 0.8, delay: 0.4, ease: [0.21, 0.47, 0.32, 0.98] }}
-        className="relative rounded-2xl overflow-hidden border border-white/15 shadow-2xl"
+        className="relative rounded-2xl overflow-hidden border border-white/15 shadow-2xl max-w-full w-full"
         style={{ background: "rgba(7,27,52,0.85)", backdropFilter: "blur(16px)" }}
       >
         {/* Browser chrome */}
@@ -52,42 +52,44 @@ const HeroDashboard: React.FC = () => {
         </div>
 
         {/* Dashboard content */}
-        <div className="flex" style={{ minHeight: 370 }}>
+        <div className="flex flex-col sm:flex-row min-h-[340px] sm:min-h-[370px]">
           {/* Sidebar */}
-          <div className="w-44 border-r border-white/10 p-3 flex flex-col gap-1.5 shrink-0 bg-white/[0.02]">
-            <div className="flex items-center gap-2 px-2 py-1.5 mb-2">
+          <div className="w-full sm:w-44 border-b sm:border-b-0 sm:border-r border-white/10 p-2 sm:p-3 flex sm:flex-col items-center sm:items-stretch gap-1.5 shrink-0 bg-white/[0.02] overflow-x-auto custom-scrollbar">
+            <div className="hidden sm:flex items-center gap-2 px-2 py-1.5 mb-2">
               <div className="w-5 h-5 rounded bg-[var(--accent)] flex items-center justify-center shadow-sm shadow-[var(--accent)]/50">
                 <span className="text-white text-xs font-bold">C</span>
               </div>
               <span className="text-white text-xs font-700 tracking-wide">CALDIM Core</span>
             </div>
-            {navItems.map(({ icon: Icon, label, id }) => {
-              const active = activeTab === id;
-              return (
-                <button
-                  key={id}
-                  onClick={() => setActiveTab(id)}
-                  type="button"
-                  className={`w-full flex items-center justify-between px-2.5 py-2 rounded-lg text-xs transition-all duration-200 cursor-pointer ${
-                    active
-                      ? "bg-[var(--accent)] text-white shadow-md shadow-[var(--accent)]/30 font-600 scale-[1.02]"
-                      : "text-white/50 hover:text-white/85 hover:bg-white/8 font-500"
-                  }`}
-                >
-                  <div className="flex items-center gap-2">
-                    <Icon size={13} className={active ? "text-white" : "text-white/60"} />
-                    <span>{label}</span>
-                  </div>
-                  {active && (
-                    <span className="w-1.5 h-1.5 rounded-full bg-white shadow-sm shadow-white animate-pulse" />
-                  )}
-                </button>
-              );
-            })}
+            <div className="flex sm:flex-col gap-1.5 w-full">
+              {navItems.map(({ icon: Icon, label, id }) => {
+                const active = activeTab === id;
+                return (
+                  <button
+                    key={id}
+                    onClick={() => setActiveTab(id)}
+                    type="button"
+                    className={`flex items-center justify-between px-2.5 py-1.5 sm:py-2 rounded-lg text-xs transition-all duration-200 cursor-pointer shrink-0 ${
+                      active
+                        ? "bg-[var(--accent)] text-white shadow-md shadow-[var(--accent)]/30 font-600 scale-[1.02]"
+                        : "text-white/50 hover:text-white/85 hover:bg-white/8 font-500"
+                    }`}
+                  >
+                    <div className="flex items-center gap-1.5 sm:gap-2">
+                      <Icon size={13} className={active ? "text-white" : "text-white/60"} />
+                      <span className="text-[11px] sm:text-xs">{label}</span>
+                    </div>
+                    {active && (
+                      <span className="w-1.5 h-1.5 rounded-full bg-white shadow-sm shadow-white animate-pulse hidden sm:inline-block" />
+                    )}
+                  </button>
+                );
+              })}
+            </div>
           </div>
 
           {/* Main content */}
-          <div className="flex-1 p-4 flex flex-col gap-3.5 overflow-hidden">
+          <div className="flex-1 p-3 sm:p-4 flex flex-col gap-3.5 overflow-hidden">
             {activeTab === "Dashboard" && (
               <motion.div
                 key="Dashboard"
@@ -97,20 +99,20 @@ const HeroDashboard: React.FC = () => {
                 className="flex flex-col gap-3.5 h-full"
               >
                 {/* Metric cards row */}
-                <div className="grid grid-cols-3 gap-3">
+                <div className="grid grid-cols-3 gap-1.5 sm:gap-3">
                   {[
-                    { label: "Agent Autonomy", value: "94.2%", delta: "Autonomous Fleet", color: "var(--accent-light)" },
-                    { label: "Inference Speed", value: "185ms", delta: "Gemini-Flash Core", color: "#10B981" },
-                    { label: "Orchestrated Tasks", value: "3.4M", delta: "Completed today", color: "#F59E0B" },
+                    { label: "CALTIMS Sync", fullLabel: "CALTIMS Payroll", value: "99.8%", delta: "Automated Timesheets", color: "var(--accent-light)" },
+                    { label: "CALBUY Savings", fullLabel: "CALBUY Sourcing", value: "12%", delta: "Vendor Bidding", color: "#10B981" },
+                    { label: "CALRIMS Hiring", fullLabel: "CALRIMS Pipeline", value: "1,240", delta: "Candidates Audited", color: "#F59E0B" },
                   ].map((metric) => (
                     <div
                       key={metric.label}
-                      className="rounded-lg p-2.5 transition-all hover:bg-white/8"
+                      className="rounded-lg p-1.5 sm:p-2.5 transition-all hover:bg-white/8 text-center sm:text-left overflow-hidden"
                       style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.08)" }}
                     >
-                      <div className="text-white/50 text-[11px] mb-1">{metric.label}</div>
-                      <div className="text-white font-700 text-lg leading-none">{metric.value}</div>
-                      <div className="text-[10px] mt-1 font-600" style={{ color: metric.color }}>{metric.delta}</div>
+                      <div className="text-white/50 text-[9px] sm:text-[11px] mb-0.5 truncate">{metric.fullLabel}</div>
+                      <div className="text-white font-700 text-sm sm:text-lg leading-none truncate">{metric.value}</div>
+                      <div className="text-[8px] sm:text-[10px] mt-1 font-600 truncate" style={{ color: metric.color }}>{metric.delta}</div>
                     </div>
                   ))}
                 </div>
@@ -123,7 +125,7 @@ const HeroDashboard: React.FC = () => {
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-white/80 text-xs font-700 flex items-center gap-1.5">
                       <BarChart3 size={13} className="text-[var(--accent-light)]" />
-                      AI Token Inference Velocity
+                      CALDIM Digitalization Telemetry Velocity
                     </span>
                     <span className="text-[10px] font-700 text-[#10B981] bg-[#10B981]/20 px-2 py-0.5 rounded-full flex items-center gap-1">
                       <span className="w-1.5 h-1.5 rounded-full bg-[#10B981] animate-ping" />
@@ -165,14 +167,14 @@ const HeroDashboard: React.FC = () => {
                   style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.06)" }}
                 >
                   <div className="text-white/70 text-[11px] font-700 mb-2 flex items-center justify-between">
-                    <span>Recent Agentic Operations</span>
+                    <span>Live CALDIM Product Operations</span>
                     <span className="text-white/40 font-mono text-[9px]">UTC 14:28:09</span>
                   </div>
                   <div className="flex flex-col gap-1.5">
                     {[
-                      { status: "AGENT CALBUY", msg: "Negotiated 12% saving with steel supplier", color: "#10B981" },
-                      { status: "AGENT CALRIMS", msg: "Scanned 1,240 resumes & invited 3 leads to screening", color: "var(--accent-light)" },
-                      { status: "AGENT CALTIMS", msg: "Flagged shift anomaly & updated payroll profile", color: "#F59E0B" },
+                      { status: "CALBUY PO", msg: "PO #9912 generated: 15 Tons TMT Steel from primary vendor", color: "#10B981" },
+                      { status: "CALTIMS PAY", msg: "Processed monthly payroll for 480 workforce members", color: "var(--accent-light)" },
+                      { status: "CALRIMS HR", msg: "Voice screening completed for Lead Mechanical Engineer", color: "#F59E0B" },
                     ].map((log) => (
                       <div key={log.msg} className="flex items-center gap-2 text-[11px]">
                         <span
@@ -200,9 +202,9 @@ const HeroDashboard: React.FC = () => {
                 {/* Metric cards row */}
                 <div className="grid grid-cols-3 gap-3">
                   {[
-                    { label: "Active Pipelines", value: "18", delta: "4 running live", color: "var(--accent-light)" },
-                    { label: "Time Saved", value: "4,280h", delta: "+24% vs last mo", color: "#10B981" },
-                    { label: "Success Rate", value: "99.8%", delta: "0 failed jobs", color: "#A855F7" },
+                    { label: "Active Pipelines", value: "18", delta: "CALBUY, CALTIMS & CALRIMS", color: "var(--accent-light)" },
+                    { label: "Automated Hours", value: "4,280h", delta: "Saved per month", color: "#10B981" },
+                    { label: "Dispatch Accuracy", value: "99.8%", delta: "Zero ERP Error Margin", color: "#A855F7" },
                   ].map((metric) => (
                     <div
                       key={metric.label}
@@ -224,7 +226,7 @@ const HeroDashboard: React.FC = () => {
                   <div className="flex items-center justify-between mb-2.5">
                     <span className="text-white/80 text-xs font-700 flex items-center gap-1.5">
                       <GitBranch size={13} className="text-[#A855F7]" />
-                      Live Automation Pipeline
+                      CALDIM Integrated Product Pipeline
                     </span>
                     <span className="text-[10px] font-700 text-[#A855F7] bg-[#A855F7]/20 px-2 py-0.5 rounded-full">
                       Automated Flow
@@ -233,18 +235,18 @@ const HeroDashboard: React.FC = () => {
                   <div className="grid grid-cols-3 gap-2 items-center text-center">
                     <div className="bg-white/8 border border-white/12 rounded-md p-2 flex flex-col items-center">
                       <div className="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center mb-1 text-xs font-bold">1</div>
-                      <span className="text-white font-600 text-[11px]">Webhook Trigger</span>
-                      <span className="text-white/40 text-[9px] mt-0.5">Instant • 12ms</span>
+                      <span className="text-white font-600 text-[11px]">Timesheet Sync</span>
+                      <span className="text-white/40 text-[9px] mt-0.5">CALTIMS Engine • 12ms</span>
                     </div>
                     <div className="bg-white/8 border border-white/12 rounded-md p-2 flex flex-col items-center relative">
                       <div className="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 flex items-center justify-center mb-1 text-xs font-bold">2</div>
-                      <span className="text-white font-600 text-[11px]">AI Classification</span>
-                      <span className="text-white/40 text-[9px] mt-0.5">Gemini • 85ms</span>
+                      <span className="text-white font-600 text-[11px]">Vendor Auto-Bid</span>
+                      <span className="text-white/40 text-[9px] mt-0.5">CALBUY Sourcing • 85ms</span>
                     </div>
                     <div className="bg-white/8 border border-white/12 rounded-md p-2 flex flex-col items-center">
                       <div className="w-6 h-6 rounded-full bg-green-500/20 text-green-400 flex items-center justify-center mb-1 text-xs font-bold">3</div>
-                      <span className="text-white font-600 text-[11px]">ERP Auto-Sync</span>
-                      <span className="text-white/40 text-[9px] mt-0.5">Validated • 45ms</span>
+                      <span className="text-white font-600 text-[11px]">Resume Screening</span>
+                      <span className="text-white/40 text-[9px] mt-0.5">CALRIMS AI • 45ms</span>
                     </div>
                   </div>
                 </div>
@@ -254,12 +256,12 @@ const HeroDashboard: React.FC = () => {
                   className="rounded-lg p-3"
                   style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.06)" }}
                 >
-                  <div className="text-white/70 text-[11px] font-700 mb-2">Active Workflow Execution</div>
+                  <div className="text-white/70 text-[11px] font-700 mb-2">CALDIM Workflow Execution Status</div>
                   <div className="flex flex-col gap-1.5">
                     {[
-                      { name: "Invoicing Automation #4928", status: "SUCCESS", desc: "142 invoices processed", color: "#10B981" },
-                      { name: "Lead Routing AI #4927", status: "RUNNING", desc: "Classifying batch (38 leads)", color: "var(--accent-light)" },
-                      { name: "Inventory Threshold Alert #4926", status: "COMPLETED", desc: "PO #9912 generated", color: "#A855F7" },
+                      { name: "CALTIMS Track-to-Pay #4928", status: "COMPLETED", desc: "142 timesheets synced to ledger", color: "#10B981" },
+                      { name: "CALBUY Vendor Sourcing #4927", status: "RUNNING", desc: "Bidding live across 4 suppliers", color: "var(--accent-light)" },
+                      { name: "CALRIMS Candidate Flow #4926", status: "SUCCESS", desc: "Offer kit & portal login created", color: "#A855F7" },
                     ].map((flow) => (
                       <div key={flow.name} className="flex items-center justify-between text-[11px]">
                         <div className="flex items-center gap-2 truncate">
@@ -290,9 +292,9 @@ const HeroDashboard: React.FC = () => {
                 {/* Metric cards row */}
                 <div className="grid grid-cols-3 gap-3">
                   {[
-                    { label: "Threat Score", value: "A+", delta: "99/100 Security Rating", color: "#10B981" },
-                    { label: "Active Firewall", value: "WAF+", delta: "Blocking 142 req/m", color: "var(--accent-light)" },
-                    { label: "Compliance", value: "SOC 2", delta: "ISO 27001 Certified", color: "#A855F7" },
+                    { label: "Data Governance", value: "A+", delta: "Statutory Compliant", color: "#10B981" },
+                    { label: "Access Control", value: "RBAC", delta: "Module-Level Permissions", color: "var(--accent-light)" },
+                    { label: "Audit Ledger", value: "100%", delta: "Indian Tax, PF & ESI", color: "#A855F7" },
                   ].map((metric) => (
                     <div
                       key={metric.label}
@@ -314,17 +316,17 @@ const HeroDashboard: React.FC = () => {
                   <div className="flex items-center justify-between mb-2.5">
                     <span className="text-white/80 text-xs font-700 flex items-center gap-1.5">
                       <Shield size={13} className="text-[#10B981]" />
-                      Real-Time Intrusion & Threat Defense
+                      Enterprise Financial & Workforce Protection
                     </span>
                     <span className="text-[10px] font-700 text-[#10B981] bg-[#10B981]/20 px-2 py-0.5 rounded-full">
-                      Zero Breaches
+                      Zero Data Leakage
                     </span>
                   </div>
                   <div className="flex flex-col gap-1.5">
                     {[
-                      { rule: "WAF Rule #104", action: "BLOCKED", desc: "SQL injection attempt intercepted from IP 192.168.x.x", color: "#EF4444" },
-                      { rule: "Zero-Trust IAM", action: "VERIFIED", desc: "MFA challenge completed for DevOps admin session", color: "#10B981" },
-                      { rule: "Vulnerability Scan", action: "PASSED", desc: "Automated daily dependency auditing passed cleanly", color: "var(--accent-light)" },
+                      { rule: "CALTIMS Salary Ledger", action: "ENCRYPTED", desc: "256-bit AES protection on salary & bank files", color: "#10B981" },
+                      { rule: "CALBUY PO Approval", action: "AUDITED", desc: "Immutable procurement approval logs verified", color: "var(--accent-light)" },
+                      { rule: "CALRIMS Candidate IAM", action: "VERIFIED", desc: "Role-based access check passed for HR team", color: "#A855F7" },
                     ].map((sec) => (
                       <div key={sec.rule} className="flex items-center gap-2 text-[11px] bg-white/[0.03] p-2 rounded border border-white/5">
                         <span
@@ -352,8 +354,8 @@ const HeroDashboard: React.FC = () => {
                       <Shield size={15} />
                     </div>
                     <div>
-                      <div className="text-white font-700 text-[11px]">End-to-End Enterprise Encryption</div>
-                      <div className="text-[#10B981] text-[10px]">256-bit AES data-at-rest & TLS 1.3 in-transit active</div>
+                      <div className="text-white font-700 text-[11px]">CALDIM Enterprise Data Governance</div>
+                      <div className="text-[#10B981] text-[10px]">Statutory Tax, PF, ESI & Bank File Security Active</div>
                     </div>
                   </div>
                   <span className="text-xs text-[#10B981] font-800 px-2 py-0.5 bg-[#10B981]/20 rounded">SECURE</span>
@@ -372,9 +374,9 @@ const HeroDashboard: React.FC = () => {
                 {/* Metric cards row */}
                 <div className="grid grid-cols-3 gap-3">
                   {[
-                    { label: "Active Models", value: "Gemini 3.1", delta: "Fine-tuned & Local", color: "var(--accent-light)" },
-                    { label: "Avg Response", value: "180 ms", delta: "High-throughput mode", color: "#10B981" },
-                    { label: "Tokens Processed", value: "4.8M", delta: "+18% speedup today", color: "#F59E0B" },
+                    { label: "Active Intelligence", value: "CAL-AI", delta: "Product Core", color: "var(--accent-light)" },
+                    { label: "Screening Speed", value: "180ms", delta: "Sub-Second Processing", color: "#10B981" },
+                    { label: "Data Sourced", value: "4.8M", delta: "POs, Logs & Resumes", color: "#F59E0B" },
                   ].map((metric) => (
                     <div
                       key={metric.label}
@@ -396,17 +398,17 @@ const HeroDashboard: React.FC = () => {
                   <div className="flex items-center justify-between mb-2.5">
                     <span className="text-white/80 text-xs font-700 flex items-center gap-1.5">
                       <Cpu size={13} className="text-[var(--accent-light)]" />
-                      Autonomous AI Agents & Inferencing
+                      CALDIM Product Sourcing & Telemetry Engine
                     </span>
                     <span className="text-[10px] font-700 text-[var(--accent-light)] bg-[var(--accent)]/30 px-2 py-0.5 rounded-full">
-                      Neural Core v3
+                      Product Intelligence v3
                     </span>
                   </div>
                   <div className="flex flex-col gap-2">
                     {[
-                      { agent: "DocuExtract Agent v2.1", task: "Extracting unstructured PDF invoices to structured JSON schema", status: "ACTIVE", color: "var(--accent-light)" },
-                      { agent: "Predictive Maintenance AI", task: "Monitoring live IoT telemetry streams for anomaly signatures", status: "RUNNING", color: "#10B981" },
-                      { agent: "Customer NLP Router", task: "Classifying & auto-routing support tickets (98.4% accuracy)", status: "ONLINE", color: "#A855F7" },
+                      { agent: "CALRIMS AI Screener", task: "Extracting candidate resume profiles & running adaptive Q&A", status: "ACTIVE", color: "var(--accent-light)" },
+                      { agent: "CALBUY Smart Sourcing", task: "Analyzing vendor pricing history for optimal PO creation", status: "RUNNING", color: "#10B981" },
+                      { agent: "Warehouse Telemetry", task: "Monitoring stock thresholds & auto-generating reorder alerts", status: "ONLINE", color: "#A855F7" },
                     ].map((item) => (
                       <div key={item.agent} className="flex items-center justify-between bg-white/5 rounded px-2.5 py-1.5 border border-white/8">
                         <div className="truncate pr-2">
@@ -428,9 +430,9 @@ const HeroDashboard: React.FC = () => {
                 >
                   <div className="flex items-center gap-2">
                     <div className="w-2 h-2 rounded-full bg-blue-400 animate-pulse" />
-                    <span className="text-white font-600 text-[11px]">Real-Time Vector Embedding Index Active</span>
+                    <span className="text-white font-600 text-[11px]">Real-Time Product Sourcing Index Active</span>
                   </div>
-                  <span className="text-blue-400 font-700 text-[10px]">Sub-10ms similarity search</span>
+                  <span className="text-blue-400 font-700 text-[10px]">Sub-10ms similarity match</span>
                 </div>
               </motion.div>
             )}
@@ -446,8 +448,8 @@ const HeroDashboard: React.FC = () => {
                 {/* Metric cards row */}
                 <div className="grid grid-cols-3 gap-3">
                   {[
-                    { label: "Active RPA Bots", value: "32 Bots", delta: "Working 24/7 autonomous", color: "var(--accent-light)" },
-                    { label: "Tasks Automated", value: "14.2K", delta: "/ day without manual effort", color: "#10B981" },
+                    { label: "Active CALDIM Bots", value: "32 Bots", delta: "Working 24/7 autonomous", color: "var(--accent-light)" },
+                    { label: "Daily Operations", value: "14.2K", delta: "Payroll, POs & Attendance", color: "#10B981" },
                     { label: "ROI Efficiency", value: "12x", delta: "Verified cost savings", color: "#A855F7" },
                   ].map((metric) => (
                     <div
@@ -470,7 +472,7 @@ const HeroDashboard: React.FC = () => {
                   <div className="flex items-center justify-between mb-2.5">
                     <span className="text-white/80 text-xs font-700 flex items-center gap-1.5">
                       <Zap size={13} className="text-[#F59E0B]" />
-                      Robotic Process & Integration Bots
+                      CALDIM Digitalization & Process Automation
                     </span>
                     <span className="text-[10px] font-700 text-[#F59E0B] bg-[#F59E0B]/20 px-2 py-0.5 rounded-full">
                       Zero Human Error
@@ -478,9 +480,9 @@ const HeroDashboard: React.FC = () => {
                   </div>
                   <div className="flex flex-col gap-2">
                     {[
-                      { name: "SAP to Salesforce Sync Bot", detail: "Synced 450 customer accounts in last 5 mins", status: "SUCCESS", color: "#10B981" },
-                      { name: "Payroll & Timesheet Reconciler", detail: "Scheduled weekly run every Friday 18:00 UTC", status: "SCHEDULED", color: "var(--accent-light)" },
-                      { name: "Customer Onboarding Auto-Mail", detail: "Sent welcome kit & portal credentials to 14 users", status: "COMPLETED", color: "#A855F7" },
+                      { name: "CALBUY ERP Integration Bot", detail: "Auto-synced purchase orders directly into enterprise ledger", status: "SUCCESS", color: "#10B981" },
+                      { name: "CALTIMS Statutory Bot", detail: "Calculated monthly PF/ESI deductions for active workers", status: "COMPLETED", color: "var(--accent-light)" },
+                      { name: "CALRIMS Onboarding Bot", detail: "Sent automated welcome kit & portal credentials", status: "COMPLETED", color: "#A855F7" },
                     ].map((bot) => (
                       <div key={bot.name} className="flex items-center justify-between bg-white/5 rounded px-2.5 py-1.5 border border-white/8">
                         <div className="truncate pr-2">
@@ -502,7 +504,7 @@ const HeroDashboard: React.FC = () => {
                 >
                   <div className="flex items-center gap-2">
                     <Zap size={14} className="text-[#F59E0B]" />
-                    <span className="text-white font-700 text-[11px]">Continuous Autonomous Execution Mode</span>
+                    <span className="text-white font-700 text-[11px]">CALDIM Autonomous Digitalization Suite</span>
                   </div>
                   <span className="text-[#F59E0B] font-700 text-[10px]">100% Unattended</span>
                 </div>
@@ -530,8 +532,8 @@ const HeroDashboard: React.FC = () => {
             <Shield size={14} className="text-green-400" />
           </div>
           <div>
-            <div className="text-white text-xs font-600">94.2% Autonomy</div>
-            <div className="text-green-400 text-[11px]">Agentic Workflow Fleet</div>
+            <div className="text-white text-xs font-600">CALDIM Suite</div>
+            <div className="text-green-400 text-[11px]">99.8% Automated Accuracy</div>
           </div>
         </div>
       </motion.div>
@@ -549,12 +551,12 @@ const HeroDashboard: React.FC = () => {
             background: "rgba(7,27,52,0.9)",
           }}
         >
-          <div className="w-8 h-8 rounded-lg bg-[var(--accent)]/20 flex items-center justify-center">
-            <Zap size={14} className="text-[var(--accent-light)]" />
+          <div className="w-8 h-8 rounded-lg bg-blue-500/20 flex items-center justify-center">
+            <Zap size={14} className="text-blue-400" />
           </div>
           <div>
-            <div className="text-white text-xs font-600">Gemini-Flash Core</div>
-            <div className="text-[var(--accent-light)] text-[11px]">Sub-185ms Inference</div>
+            <div className="text-white text-xs font-600">CALBUY • CALTIMS • CALRIMS</div>
+            <div className="text-blue-400 text-[11px]">Enterprise Digital Automation</div>
           </div>
         </div>
       </motion.div>
@@ -631,19 +633,19 @@ export const HeroSection: React.FC = () => {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="inline-flex items-center gap-2.5 badge badge-accent mb-6 bg-blue-50/90 border border-blue-200/80 text-blue-700 px-4 py-1.5 rounded-full shadow-sm"
+              className="inline-flex flex-wrap items-center gap-1.5 sm:gap-2.5 badge badge-accent mb-6 bg-blue-50/90 border border-blue-200/80 text-blue-700 px-3 sm:px-4 py-1.5 rounded-full shadow-sm max-w-full text-xs"
             >
-              <span className="w-2 h-2 rounded-full bg-blue-600 animate-pulse" />
-              <span className="font-800 tracking-wide">CALDIM • DAS</span>
-              <span className="text-slate-300">|</span>
-              <span className="font-600 text-slate-700">Digitalization & Automation Solutions</span>
+              <span className="w-2 h-2 rounded-full bg-blue-600 animate-pulse shrink-0" />
+              <span className="font-800 tracking-wide shrink-0">CALDIM • DAS</span>
+              <span className="text-slate-300 hidden sm:inline">|</span>
+              <span className="font-600 text-slate-700 text-[10px] sm:text-xs truncate">Digitalization & Automation Solutions</span>
             </motion.div>
 
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-4xl md:text-6xl font-900 text-[var(--navy)] tracking-tight mb-6 leading-tight"
+              className="text-hero text-[var(--navy)] tracking-tight mb-4 sm:mb-6 leading-tight break-words"
             >
               Next-Generation Software & AI{" "}
               <span className="gradient-text">That Drives Business Growth</span>
@@ -653,7 +655,7 @@ export const HeroSection: React.FC = () => {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-slate-900 font-700 text-lg md:text-xl max-w-xl leading-relaxed mb-10 bg-white/90 backdrop-blur-md px-6 py-4 rounded-2xl shadow-sm border border-slate-200"
+              className="text-slate-900 font-700 text-sm sm:text-base md:text-lg max-w-xl leading-relaxed mb-6 sm:mb-10 bg-white/90 backdrop-blur-md p-4 sm:px-6 sm:py-4 rounded-2xl shadow-sm border border-slate-200 w-full"
             >
               <strong className="text-blue-700 font-800">CALDIM-DAS (Digitalization & Automation Solutions)</strong> delivers enterprise software, AI solutions and industry-focused technology solutions built for modern businesses.
             </motion.p>
@@ -662,15 +664,15 @@ export const HeroSection: React.FC = () => {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="flex flex-wrap gap-4"
+              className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto max-w-full"
             >
-              <Link href="/contact" className="btn btn-primary btn-lg bg-blue-600 hover:bg-blue-700 text-white shadow-md shadow-blue-500/10 transition-all duration-200" id="hero-cta-primary">
+              <Link href="/contact" className="btn btn-primary btn-lg bg-blue-600 hover:bg-blue-700 text-white shadow-md shadow-blue-500/10 transition-all duration-200 w-full sm:w-auto justify-center text-sm sm:text-base" id="hero-cta-primary">
                 Schedule a Demo
                 <ArrowRight size={18} />
               </Link>
               <Link
                 href="/services"
-                className="btn btn-secondary btn-lg bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 transition-all duration-200"
+                className="btn btn-secondary btn-lg bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 transition-all duration-200 w-full sm:w-auto justify-center text-sm sm:text-base"
                 id="hero-cta-secondary"
               >
                 Explore Our Services
@@ -683,16 +685,16 @@ export const HeroSection: React.FC = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.6 }}
-              className="mt-12 pt-8 border-t border-slate-200 grid grid-cols-3 gap-6"
+              className="mt-6 sm:mt-10 pt-6 sm:pt-8 border-t border-slate-200 grid grid-cols-3 gap-2 sm:gap-6"
             >
               {[
                 { value: "1+", label: "Years" },
                 { value: "15+", label: "Products" },
                 { value: "10+", label: "Enterprise Products" },
               ].map(({ value, label }) => (
-                <div key={label}>
-                  <div className="text-3xl font-900 text-[var(--navy)] mb-1">{value}</div>
-                  <div className="text-slate-900 font-700 text-xs md:text-sm">{label}</div>
+                <div key={label} className="text-center sm:text-left flex flex-col justify-center">
+                  <div className="text-xl sm:text-2xl md:text-3xl font-900 text-[var(--navy)] mb-0.5 sm:mb-1 tracking-tight">{value}</div>
+                  <div className="text-slate-900 font-700 text-[10px] sm:text-xs md:text-sm leading-snug">{label}</div>
                 </div>
               ))}
             </motion.div>

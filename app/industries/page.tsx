@@ -320,7 +320,7 @@ export default function IndustriesPage() {
                         <span className={`text-[10px] font-mono tracking-widest uppercase block mb-4 ${isDark ? "text-slate-400" : "text-slate-500"}`}>
                           Verified {strip.title.split("&")[0].trim()} Performance Gains:
                         </span>
-                        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                        <div className="grid-auto-fit-sm">
                           {strip.metrics.map((kpi, idx) => (
                             <div key={idx} className={`p-3 rounded-2xl border text-center ${isDark ? "bg-black/30 border-white/5" : "bg-slate-50 border-slate-200/80"}`}>
                               <div className="text-xl sm:text-2xl font-900 font-mono tracking-tight" style={{ color: strip.themeColor }}>
@@ -396,13 +396,13 @@ export default function IndustriesPage() {
                         </div>
 
                         {/* Strip Action Link */}
-                        <div className="mt-6 pt-5 border-t border-current/10 flex items-center justify-between">
+                        <div className="mt-6 pt-5 border-t border-current/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
                           <span className="text-xs font-mono opacity-60">
                             Custom specs required for {strip.title.split("&")[0].trim()}?
                           </span>
                           <Link
                             href="/contact"
-                            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-800 tracking-wide transition-all shadow-md group hover:scale-105 active:scale-95 text-white"
+                            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-800 tracking-wide transition-all shadow-md group hover:scale-105 active:scale-95 text-white w-full sm:w-auto justify-center"
                             style={{ background: strip.themeColor }}
                           >
                             <span>Request Sector Consultation</span>

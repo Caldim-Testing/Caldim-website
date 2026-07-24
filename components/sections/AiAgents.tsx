@@ -293,7 +293,7 @@ export const AiAgentsSection: React.FC = () => {
             {[...agents, ...agents].map((agent, index) => (
               <div
                 key={`${agent.id}-${index}`}
-                className="w-[33vw] max-w-[400px] shrink-0 px-4 flex justify-center"
+                className="w-[82vw] sm:w-[50vw] md:w-[33vw] max-w-[360px] shrink-0 px-2 sm:px-4 flex justify-center"
               >
                 <div onClick={() => handleStartAgent(agent.id)} className="flex flex-col items-center group cursor-pointer w-full">
                   {/* Agent Core Hologram */}
@@ -358,7 +358,7 @@ export const AiAgentsSection: React.FC = () => {
                 >
                   <X size={20} />
                 </button>
-                <div className="max-h-[90vh] overflow-y-auto">
+                <div className="max-h-[88dvh] overflow-y-auto">
                   <RecruitmentSimulator />
                 </div>
               </motion.div>
@@ -376,7 +376,7 @@ export const AiAgentsSection: React.FC = () => {
                 >
                   <X size={20} />
                 </button>
-                <div className="max-h-[90vh] overflow-y-auto">
+                <div className="max-h-[88dvh] overflow-y-auto">
                   <ProcurementSimulator />
                 </div>
               </motion.div>
@@ -394,7 +394,7 @@ export const AiAgentsSection: React.FC = () => {
                 >
                   <X size={20} />
                 </button>
-                <div className="max-h-[90vh] overflow-y-auto">
+                <div className="max-h-[88dvh] overflow-y-auto">
                   <CalemsSimulator />
                 </div>
               </motion.div>
@@ -412,7 +412,7 @@ export const AiAgentsSection: React.FC = () => {
                 >
                   <X size={20} />
                 </button>
-                <div className="max-h-[90vh] overflow-y-auto">
+                <div className="max-h-[88dvh] overflow-y-auto">
                   <CaltimsSimulator />
                 </div>
               </motion.div>
@@ -430,7 +430,7 @@ export const AiAgentsSection: React.FC = () => {
                 >
                   <X size={20} />
                 </button>
-                <div className="max-h-[90vh] overflow-y-auto">
+                <div className="max-h-[88dvh] overflow-y-auto">
                   <MiscSimulator />
                 </div>
               </motion.div>
@@ -448,7 +448,7 @@ export const AiAgentsSection: React.FC = () => {
                 >
                   <X size={20} />
                 </button>
-                <div className="max-h-[90vh] overflow-y-auto">
+                <div className="max-h-[88dvh] overflow-y-auto">
                   <ProjectManagementSimulator />
                 </div>
               </motion.div>
@@ -466,7 +466,7 @@ export const AiAgentsSection: React.FC = () => {
                 >
                   <X size={20} />
                 </button>
-                <div className="max-h-[90vh] overflow-y-auto">
+                <div className="max-h-[88dvh] overflow-y-auto">
                   <AssetManagementSimulator />
                 </div>
               </motion.div>
@@ -484,7 +484,7 @@ export const AiAgentsSection: React.FC = () => {
                 >
                   <X size={20} />
                 </button>
-                <div className="max-h-[90vh] overflow-y-auto">
+                <div className="max-h-[88dvh] overflow-y-auto">
                   <WarehouseManagementSimulator />
                 </div>
               </motion.div>

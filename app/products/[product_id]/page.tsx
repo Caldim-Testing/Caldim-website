@@ -177,14 +177,14 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                   Deep-dive into the automated mechanics and capabilities built directly into the core engine.
                 </p>
               </FadeUp>
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <div className="grid-auto-fit-md">
                 {product.features.map((feat, idx) => (
-                  <div key={idx} className="p-8 rounded-[2rem] bg-white border border-slate-100 shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-[0_12px_40px_rgb(0,0,0,0.08)] transition-all duration-400 group">
-                    <div className="w-12 h-12 rounded-2xl flex items-center justify-center mb-6 font-900 text-lg transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3" style={{ background: `${product.color}15`, color: product.color }}>
+                  <div key={idx} className="p-6 sm:p-8 rounded-[2rem] bg-white border border-slate-100 shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-[0_12px_40px_rgb(0,0,0,0.08)] transition-all duration-400 group">
+                    <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl flex items-center justify-center mb-5 sm:mb-6 font-900 text-lg transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3" style={{ background: `${product.color}15`, color: product.color }}>
                       {idx + 1}
                     </div>
-                    <h3 className="text-xl font-800 text-slate-900 mb-3 tracking-tight group-hover:text-slate-800 transition-colors">{feat.title}</h3>
-                    <p className="text-sm text-slate-600 leading-relaxed font-500">{feat.desc}</p>
+                    <h3 className="text-lg sm:text-xl font-800 text-slate-900 mb-2.5 tracking-tight group-hover:text-slate-800 transition-colors">{feat.title}</h3>
+                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-500">{feat.desc}</p>
                   </div>
                 ))}
               </div>
@@ -194,26 +194,26 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
 
         {/* Why Choose Section */}
         {product.whyChoose && product.whyChoose.length > 0 && (
-          <section className="py-24 bg-white relative">
+          <section className="py-16 sm:py-24 bg-white relative">
             <div className="container-wide">
-              <div className="grid lg:grid-cols-12 gap-12 items-center">
+              <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
                 <div className="lg:col-span-4">
                   <FadeUp>
-                    <div className="badge mb-6 border-slate-200 bg-slate-50 text-slate-700 font-800 uppercase tracking-widest text-[10px]">
+                    <div className="badge mb-4 sm:mb-6 border-slate-200 bg-slate-50 text-slate-700 font-800 uppercase tracking-widest text-[10px]">
                       Business Impact
                     </div>
-                    <h2 className="text-4xl font-900 text-slate-900 tracking-tight mb-6">Why {product.name}?</h2>
-                    <p className="text-base text-slate-600 font-500 leading-relaxed">
+                    <h2 className="text-2xl sm:text-4xl font-900 text-slate-900 tracking-tight mb-4 sm:mb-6">Why {product.name}?</h2>
+                    <p className="text-sm sm:text-base text-slate-600 font-500 leading-relaxed">
                       {product.tagline}
                     </p>
                   </FadeUp>
                 </div>
-                <div className="lg:col-span-8 grid md:grid-cols-3 gap-6">
+                <div className="lg:col-span-8 grid-auto-fit-sm">
                   {product.whyChoose.map((why, idx) => (
-                    <div key={idx} className="p-8 rounded-[2rem] bg-[#F8FAFC] border border-slate-100 hover:bg-white hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] transition-all duration-400 flex flex-col justify-between group">
+                    <div key={idx} className="p-6 sm:p-8 rounded-[2rem] bg-[#F8FAFC] border border-slate-100 hover:bg-white hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] transition-all duration-400 flex flex-col justify-between group">
                       <div>
-                        <h3 className="text-lg font-800 text-slate-900 mb-3 tracking-tight">{why.title}</h3>
-                        <p className="text-sm text-slate-600 leading-relaxed font-500">{why.desc}</p>
+                        <h3 className="text-base sm:text-lg font-800 text-slate-900 mb-2.5 tracking-tight">{why.title}</h3>
+                        <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-500">{why.desc}</p>
                       </div>
                     </div>
                   ))}
