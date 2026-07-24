@@ -1,8 +1,8 @@
 {
   "pageViews": {
-    "/": 28,
-    "/about": 8,
-    "/services": 0,
+    "/": 29,
+    "/about": 9,
+    "/services": 1,
     "/products": 0,
     "/contact": 4,
     "/industries": 2
@@ -225,6 +225,21 @@
       "timestamp": "2026-07-24T10:10:34.641Z",
       "action": "Page View",
       "details": "/"
+    },
+    {
+      "timestamp": "2026-07-24T10:57:56.579Z",
+      "action": "Page View",
+      "details": "/"
+    },
+    {
+      "timestamp": "2026-07-24T10:59:36.439Z",
+      "action": "Page View",
+      "details": "/about"
+    },
+    {
+      "timestamp": "2026-07-24T10:59:54.128Z",
+      "action": "Page View",
+      "details": "/services"
     }
   ]
 }
