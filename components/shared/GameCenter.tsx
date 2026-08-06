@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import { X, RotateCcw, Award, ShieldAlert, Gamepad2 } from "lucide-react";
+import { X, RotateCcw, Award, ShieldAlert, Gamepad2, XCircle, AlertCircle } from "lucide-react";
 
 // --- Types & Constants for CHESS ---
 type PieceType = "p" | "r" | "n" | "b" | "q" | "k";
@@ -487,6 +487,8 @@ export const GameCenter: React.FC<GameCenterProps> = ({ onClose }) => {
   const [sudokuConflicts, setSudokuConflicts] = useState<Set<string>>(new Set());
   const [sudokuStatus, setSudokuStatus] = useState<string>("Fill the grid. Avoid duplicates.");
   const [sudokuWinner, setSudokuWinner] = useState(false);
+  const [sudokuMistakes, setSudokuMistakes] = useState(0);
+  const [sudokuGameOver, setSudokuGameOver] = useState(false);
 
   const startNewSudokuGame = useCallback(() => {
     const { puzzle, solution } = generateSudoku();
@@ -497,11 +499,23 @@ export const GameCenter: React.FC<GameCenterProps> = ({ onClose }) => {
     setSudokuConflicts(new Set());
     setSudokuStatus("Fill the grid. Avoid duplicates.");
     setSudokuWinner(false);
+    setSudokuMistakes(0);
+    setSudokuGameOver(false);
   }, []);
 
   useEffect(() => {
     startNewSudokuGame();
   }, [startNewSudokuGame]);
+
+  useEffect(() => {
+    if (!sudokuWinner) return;
+
+    const timer = setTimeout(() => {
+      startNewSudokuGame();
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, [sudokuWinner, startNewSudokuGame]);
 
   const checkSudokuConflicts = (grid: number[][]) => {
     const conflictCells = new Set<string>();
@@ -563,18 +577,26 @@ export const GameCenter: React.FC<GameCenterProps> = ({ onClose }) => {
   };
 
   const handleSudokuCellClick = (r: number, c: number) => {
-    if (sudokuWinner) return;
+    if (sudokuWinner || sudokuGameOver) return;
     if (sudokuPuzzleState[r] && sudokuPuzzleState[r][c] !== 0) return;
     setSudokuSelected([r, c]);
   };
 
   const setSudokuVal = useCallback((r: number, c: number, val: number) => {
-    if ((sudokuPuzzleState[r] && sudokuPuzzleState[r][c] !== 0) || sudokuWinner) return;
+    if ((sudokuPuzzleState[r] && sudokuPuzzleState[r][c] !== 0) || sudokuWinner || sudokuGameOver) return;
 
+    const prevVal = sudokuBoard[r]?.[c] ?? 0;
     const newGrid = sudokuBoard.map(row => [...row]);
     newGrid[r][c] = val;
 
     const newConflicts = checkSudokuConflicts(newGrid);
+
+    // Track mistakes when placing a non-matching number
+    let currentMistakes = sudokuMistakes;
+    if (val !== 0 && val !== prevVal && sudokuSolutionState[r] && val !== sudokuSolutionState[r][c]) {
+      currentMistakes = sudokuMistakes + 1;
+      setSudokuMistakes(currentMistakes);
+    }
     
     let full = true;
     let matches = true;
@@ -590,19 +612,24 @@ export const GameCenter: React.FC<GameCenterProps> = ({ onClose }) => {
     setSudokuBoard(newGrid);
     setSudokuConflicts(newConflicts);
 
-    if (full && matches && newConflicts.size === 0) {
+    if (currentMistakes >= 3) {
+      setSudokuGameOver(true);
+      setSudokuStatus("Game Over! 3 mistakes made.");
+    } else if (full && matches && newConflicts.size === 0) {
       setSudokuWinner(true);
-      setSudokuStatus("Victory! Puzzle completed.");
+      setSudokuStatus("Victory! Loading new puzzle...");
+    } else if (val !== 0 && val !== prevVal && sudokuSolutionState[r] && val !== sudokuSolutionState[r][c]) {
+      setSudokuStatus(`Wrong entry! Mistakes: ${currentMistakes}/3`);
     } else if (newConflicts.size > 0) {
       setSudokuStatus("Conflict detected! Double check entries.");
     } else {
       setSudokuStatus("Keep going! Fill all cells correctly.");
     }
-  }, [sudokuBoard, sudokuPuzzleState, sudokuSolutionState, sudokuWinner]);
+  }, [sudokuBoard, sudokuPuzzleState, sudokuSolutionState, sudokuWinner, sudokuGameOver, sudokuMistakes]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (activeTab !== "sudoku" || !sudokuSelected) return;
+      if (activeTab !== "sudoku" || !sudokuSelected || sudokuGameOver || sudokuWinner) return;
       const [r, c] = sudokuSelected;
       if (e.key >= "1" && e.key <= "9") {
         setSudokuVal(r, c, parseInt(e.key));
@@ -612,7 +639,7 @@ export const GameCenter: React.FC<GameCenterProps> = ({ onClose }) => {
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [activeTab, sudokuSelected, setSudokuVal]);
+  }, [activeTab, sudokuSelected, setSudokuVal, sudokuGameOver, sudokuWinner]);
 
   const resetSudoku = () => {
     startNewSudokuGame();
@@ -738,13 +765,37 @@ export const GameCenter: React.FC<GameCenterProps> = ({ onClose }) => {
         </div>
       ) : (
         <div className="flex flex-col gap-3">
-          <div className="border border-slate-800 rounded-lg overflow-hidden bg-slate-950 p-1">
+          {/* Header with Mistakes counter */}
+          <div className="flex items-center justify-between px-1 text-[10px]">
+            <span className="text-slate-400 font-semibold uppercase tracking-wider text-[9px]">Sudoku Puzzle</span>
+            <div className="flex items-center gap-1 bg-slate-950 px-2 py-0.5 rounded-full border border-slate-800">
+              <span className="text-slate-400 font-medium mr-1">Mistakes:</span>
+              {[1, 2, 3].map((num) => (
+                <span
+                  key={num}
+                  className={`w-3.5 h-3.5 rounded-full flex items-center justify-center text-[8px] font-extrabold ${
+                    num <= sudokuMistakes
+                      ? "bg-red-500 text-white shadow-sm shadow-red-500/50"
+                      : "bg-slate-800 text-slate-600"
+                  }`}
+                >
+                  ✕
+                </span>
+              ))}
+              <span className={`ml-1 font-bold ${sudokuMistakes > 0 ? "text-red-400" : "text-slate-400"}`}>
+                {sudokuMistakes}/3
+              </span>
+            </div>
+          </div>
+
+          <div className="relative border border-slate-800 rounded-lg overflow-hidden bg-slate-950 p-1">
             <div className="grid grid-cols-9 gap-0">
               {sudokuBoard.map((row, rIdx) =>
                 row.map((val, cIdx) => {
                   const isPreset = sudokuPuzzleState[rIdx] && sudokuPuzzleState[rIdx][cIdx] !== 0;
                   const isSelected = sudokuSelected && sudokuSelected[0] === rIdx && sudokuSelected[1] === cIdx;
                   const hasConflict = sudokuConflicts.has(`${rIdx}-${cIdx}`);
+                  const isWrong = val !== 0 && !isPreset && sudokuSolutionState[rIdx] && val !== sudokuSolutionState[rIdx][cIdx];
                   
                   const borderR = cIdx % 3 === 2 && cIdx !== 8 ? "border-r border-r-slate-500" : "border-r border-r-slate-800/40";
                   const borderB = rIdx % 3 === 2 && rIdx !== 8 ? "border-b border-b-slate-500" : "border-b border-b-slate-800/40";
@@ -755,11 +806,13 @@ export const GameCenter: React.FC<GameCenterProps> = ({ onClose }) => {
                       onClick={() => handleSudokuCellClick(rIdx, cIdx)}
                       className={`aspect-square flex items-center justify-center relative text-sm font-semibold select-none cursor-pointer transition-all ${borderR} ${borderB} ${
                         isSelected
-                          ? "bg-amber-400/20"
+                          ? "bg-amber-400/20 ring-1 ring-amber-400/60 ring-inset"
                           : isPreset
-                          ? "bg-slate-800/40 text-slate-400"
+                          ? "bg-slate-800/40 text-slate-400 font-bold"
+                          : isWrong
+                          ? "bg-red-500/25 text-red-400 font-bold animate-pulse"
                           : "bg-slate-900 text-cyan-400 hover:bg-slate-800/50"
-                      } ${hasConflict ? "bg-red-500/25 text-red-400" : ""}`}
+                      } ${hasConflict && !isWrong ? "bg-red-500/25 text-red-400" : ""}`}
                     >
                       {val !== 0 ? val : ""}
                     </div>
@@ -767,6 +820,24 @@ export const GameCenter: React.FC<GameCenterProps> = ({ onClose }) => {
                 })
               )}
             </div>
+
+            {/* Game Over Overlay */}
+            {sudokuGameOver && (
+              <div className="absolute inset-0 bg-slate-950/90 backdrop-blur-sm flex flex-col items-center justify-center p-4 text-center gap-2 z-10 animate-in fade-in duration-200">
+                <div className="w-9 h-9 rounded-full bg-red-500/20 text-red-400 flex items-center justify-center border border-red-500/40">
+                  <XCircle size={20} />
+                </div>
+                <h4 className="text-xs font-extrabold text-red-400 tracking-wider uppercase">Game Over</h4>
+                <p className="text-[10px] text-slate-300">You reached 3 mistakes! Try again with a new puzzle.</p>
+                <button
+                  onClick={startNewSudokuGame}
+                  className="mt-1 px-3 py-1 bg-red-500 hover:bg-red-600 text-white rounded-lg text-[10px] font-bold transition-all shadow-lg flex items-center gap-1 cursor-pointer"
+                >
+                  <RotateCcw size={10} />
+                  Try Again
+                </button>
+              </div>
+            )}
           </div>
 
           <div className="grid grid-cols-5 gap-1">
@@ -778,7 +849,7 @@ export const GameCenter: React.FC<GameCenterProps> = ({ onClose }) => {
                     setSudokuVal(sudokuSelected[0], sudokuSelected[1], num);
                   }
                 }}
-                disabled={!sudokuSelected || sudokuWinner}
+                disabled={!sudokuSelected || sudokuWinner || sudokuGameOver}
                 className="py-1 bg-slate-800 hover:bg-slate-700 text-white rounded text-[10px] font-bold disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
               >
                 {num}
@@ -790,7 +861,7 @@ export const GameCenter: React.FC<GameCenterProps> = ({ onClose }) => {
                   setSudokuVal(sudokuSelected[0], sudokuSelected[1], 0);
                 }
               }}
-              disabled={!sudokuSelected || sudokuWinner}
+              disabled={!sudokuSelected || sudokuWinner || sudokuGameOver}
               className="py-1 bg-slate-950 hover:bg-slate-900 text-red-400 rounded text-[9px] font-bold disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
             >
               Clear
@@ -800,10 +871,12 @@ export const GameCenter: React.FC<GameCenterProps> = ({ onClose }) => {
           <div className="flex flex-col gap-2 bg-slate-950/40 p-2.5 rounded-xl border border-slate-800">
             <div className="flex items-center justify-between text-[10px]">
               <span className={`font-semibold tracking-wide flex items-center gap-1.5 ${
-                sudokuWinner ? "text-amber-400 font-bold" : sudokuConflicts.size > 0 ? "text-red-400" : "text-cyan-400"
+                sudokuGameOver ? "text-red-400 font-bold" : sudokuWinner ? "text-amber-400 font-bold" : sudokuMistakes > 0 ? "text-amber-400" : sudokuConflicts.size > 0 ? "text-red-400" : "text-cyan-400"
               }`}>
                 {sudokuWinner ? (
                   <Award size={12} className="shrink-0" />
+                ) : sudokuGameOver ? (
+                  <AlertCircle size={12} className="shrink-0 text-red-400" />
                 ) : (
                   <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
                 )}
