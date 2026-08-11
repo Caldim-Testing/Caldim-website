@@ -7,6 +7,7 @@ import { Target, Eye, Cog, Users, Award, Shield, TrendingUp, Lightbulb } from "l
 import { AnimatedWatermark } from "@/components/about/AnimatedWatermark";
 import { AnimatedTimelineItem } from "@/components/about/AnimatedTimelineItem";
 import { CoreValuesNodeMap } from "@/components/about/CoreValuesNodeMap";
+import { CompanyCredentials } from "@/components/about/CompanyCredentials";
 
 export const metadata: Metadata = {
   title: "About CALDIM Software Division",
@@ -112,6 +113,9 @@ export default function AboutPage() {
               </FadeUp>
 
             </div>
+
+            {/* Company Credentials Section */}
+            <CompanyCredentials />
           </div>
         </section>
 

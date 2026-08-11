@@ -214,7 +214,7 @@ export const Navbar: React.FC = () => {
     <>
       <header className="fixed top-0 left-0 right-0 z-50 pointer-events-none px-2 sm:px-4 md:px-6 flex justify-center">
         <nav
-          className={`w-full max-w-6xl mt-2 sm:mt-4 md:mt-6 pointer-events-auto rounded-full transition-all duration-500 border ${
+          className={`w-full max-w-[98%] mt-2 sm:mt-4 md:mt-6 pointer-events-auto rounded-full transition-all duration-500 border ${
             scrolled
               ? "bg-[#071B34]/95 border-white/20 shadow-[0_8px_32px_rgba(7,27,52,0.8)] backdrop-blur-xl py-1"
               : "bg-[#071B34]/80 border-white/10 shadow-2xl backdrop-blur-md py-1.5 sm:py-2"

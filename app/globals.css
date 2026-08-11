@@ -177,34 +177,20 @@ body {
 
 .container-wide {
   width: 100%;
-  max-width: 1280px;
+  max-width: 100%;
   margin-left: auto;
   margin-right: auto;
-  padding-left: 1rem;
-  padding-right: 1rem;
-}
-
-@media (min-width: 640px) {
-  .container-wide {
-    padding-left: var(--space-6);
-    padding-right: var(--space-6);
-  }
+  padding-left: clamp(1rem, 3.5vw, 4rem);
+  padding-right: clamp(1rem, 3.5vw, 4rem);
 }
 
 .container-narrow {
   width: 100%;
-  max-width: 800px;
+  max-width: 100%;
   margin-left: auto;
   margin-right: auto;
-  padding-left: 1rem;
-  padding-right: 1rem;
-}
-
-@media (min-width: 640px) {
-  .container-narrow {
-    padding-left: var(--space-6);
-    padding-right: var(--space-6);
-  }
+  padding-left: clamp(1rem, 3.5vw, 4rem);
+  padding-right: clamp(1rem, 3.5vw, 4rem);
 }
 
 /* ═══════════════════════════════════════
@@ -344,11 +330,12 @@ body {
 }
 
 .fluid-container {
-  width: clamp(280px, 94vw, 1280px);
+  width: 100%;
+  max-width: 100%;
   margin-left: auto;
   margin-right: auto;
-  padding-left: clamp(0.75rem, 2vw, 1.5rem);
-  padding-right: clamp(0.75rem, 2vw, 1.5rem);
+  padding-left: clamp(1rem, 3.5vw, 4rem);
+  padding-right: clamp(1rem, 3.5vw, 4rem);
 }
 
 /* ═══════════════════════════════════════
