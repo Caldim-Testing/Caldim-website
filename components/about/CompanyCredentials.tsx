@@ -19,6 +19,8 @@ interface CredentialItem {
   details: { label: string; value: string }[];
 }
 
+const DUNS_PROFILE_URL = "https://profiles.dunsregistered.com/IndiaBasicProfile.aspx?PaArea=Email&SealkeyQ=E38723204810";
+
 const credentialsData: CredentialItem[] = [
   {
     id: "duns-cert",
@@ -212,8 +214,18 @@ export function CompanyCredentials() {
                         className="inline-flex items-center gap-1.5 text-xs font-700 text-blue-400 hover:text-blue-300 transition-colors"
                       >
                         <ShieldCheck className="w-4 h-4 text-emerald-400" />
-                        <span>View Live D&B Verification</span>
+                        <span>View Portal Window</span>
                       </button>
+                      <span className="text-slate-600">|</span>
+                      <a
+                        href={DUNS_PROFILE_URL}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 text-xs font-700 text-emerald-400 hover:text-emerald-300 transition-colors"
+                      >
+                        <span>Direct D&B Page</span>
+                        <ExternalLink className="w-3 h-3" />
+                      </a>
                       <span className="text-slate-600">|</span>
                       <button
                         onClick={() => setFullscreenImage("/credentials/duns-official-qr.png")}
@@ -244,13 +256,15 @@ export function CompanyCredentials() {
                 <span className="text-xs text-slate-400 font-600">
                   D&B Authenticated Portal
                 </span>
-                <button
-                  onClick={() => setShowLiveDnbModal(true)}
+                <a
+                  href={DUNS_PROFILE_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="inline-flex items-center gap-1.5 text-xs font-700 text-blue-400 hover:text-blue-300 transition-colors"
                 >
                   <span>View Full Verification Record</span>
                   <ExternalLink className="w-3.5 h-3.5" />
-                </button>
+                </a>
               </div>
             </div>
 
@@ -425,7 +439,7 @@ export function CompanyCredentials() {
 
               <div className="flex items-center gap-2">
                 <a
-                  href="https://profiles.dunsregistered.com/IndiaBasicProfile.aspx?PaArea=Email&SealkeyQ=E735063204810"
+                  href={DUNS_PROFILE_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-blue-600/80 hover:bg-blue-500 text-white font-700 text-xs transition-colors border border-blue-400/40"
@@ -447,7 +461,7 @@ export function CompanyCredentials() {
             {/* Embedded Live D&B Iframe Container */}
             <div className="flex-1 w-full bg-white relative overflow-hidden">
               <iframe
-                src="https://profiles.dunsregistered.com/IndiaBasicProfile.aspx?PaArea=Email&SealkeyQ=E735063204810"
+                src={DUNS_PROFILE_URL}
                 title="Live Dun & Bradstreet Verification Profile"
                 className="w-full h-full border-0"
                 loading="lazy"
@@ -462,7 +476,7 @@ export function CompanyCredentials() {
               </span>
               <div className="flex items-center gap-2">
                 <a
-                  href="https://profiles.dunsregistered.com/IndiaBasicProfile.aspx?PaArea=Email&SealkeyQ=E735063204810"
+                  href={DUNS_PROFILE_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="sm:hidden inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-blue-600 text-white text-xs font-700"
