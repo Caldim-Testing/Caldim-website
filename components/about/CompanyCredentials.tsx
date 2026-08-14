@@ -115,67 +115,71 @@ export function CompanyCredentials() {
                     Verified Document
                   </span>
                 </div>
-
-                <h3 className="text-xl sm:text-2xl font-800 text-white mb-2">
-                  D-U-N-S® Registration Certificate
-                </h3>
-                <p className="text-sm text-slate-300 leading-relaxed mb-6">
-                  CALDIM ENGINEERING PRIVATE LIMITED is officially registered with Dun & Bradstreet (D&B) and has been assigned a unique D-U-N-S® Number.
-                </p>
-
-                {/* Primary Metric Badge */}
-                <div className="bg-slate-950/80 rounded-2xl p-4 sm:p-5 border border-blue-500/20 mb-6 flex items-center justify-between">
-                  <div>
-                    <div className="text-xs font-700 text-slate-400 uppercase tracking-wider mb-1">
-                      D-U-N-S® Number
-                    </div>
-                    <div className="text-2xl sm:text-3xl font-900 text-blue-400 tracking-tight font-mono">
-                      86-039-9952
+                <div className="flex flex-col sm:flex-row items-center gap-6 mb-6">
+                  {/* Certificate Image Thumbnail */}
+                  <div 
+                    onClick={() => setSelectedCredential(credentialsData[0])}
+                    className="relative w-full sm:w-44 h-56 rounded-2xl overflow-hidden border border-blue-500/40 bg-slate-950 shadow-xl flex-shrink-0 cursor-pointer group/img flex items-center justify-center p-2"
+                  >
+                    <Image
+                      src="/credentials/duns-certificate.png"
+                      alt="D-U-N-S Registration Certificate"
+                      fill
+                      className="object-contain p-2 group-hover/img:scale-105 transition-transform duration-300"
+                    />
+                    <div className="absolute inset-0 bg-blue-950/60 opacity-0 group-hover/img:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-[2px]">
+                      <span className="bg-slate-900 text-white text-xs font-700 px-3 py-1.5 rounded-full shadow-lg border border-white/20 inline-flex items-center gap-1.5">
+                        <Eye className="w-3.5 h-3.5 text-blue-400" />
+                        Preview Document
+                      </span>
                     </div>
                   </div>
-                  <div className="p-3 bg-blue-500/10 text-blue-400 rounded-2xl border border-blue-400/30">
-                    <ShieldCheck className="w-8 h-8" />
-                  </div>
-                </div>
 
-                {/* Document Thumbnail Preview Frame */}
-                <div 
-                  onClick={() => setSelectedCredential(credentialsData[0])}
-                  className="relative w-full h-48 sm:h-56 bg-slate-950/90 rounded-2xl overflow-hidden border border-blue-500/30 flex items-center justify-center p-3 cursor-pointer group/card shadow-lg"
-                >
-                  <Image
-                    src="/credentials/duns-certificate.png"
-                    alt="D-U-N-S Registration Certificate"
-                    fill
-                    className="object-contain p-2 group-hover/card:scale-105 transition-transform duration-300"
-                  />
-                  <div className="absolute inset-0 bg-slate-950/40 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-2 backdrop-blur-[2px]">
-                    <span className="text-xs font-800 text-white bg-blue-600 px-4 py-2 rounded-xl shadow-lg border border-blue-400/40 flex items-center gap-2">
-                      <Eye className="w-4 h-4" />
-                      View Certificate Details
-                    </span>
+                  {/* Certificate Info */}
+                  <div className="flex-1 text-center sm:text-left">
+                    <h3 className="text-xl sm:text-2xl font-900 text-white leading-snug mb-2">
+                      D-U-N-S® Registration Certificate
+                    </h3>
+                    <p className="text-slate-300 text-xs sm:text-sm leading-relaxed mb-4">
+                      CALDIM ENGINEERING PRIVATE LIMITED is officially registered with Dun & Bradstreet (D&B) and assigned a verified global D-U-N-S® Number.
+                    </p>
+
+                    <div className="bg-slate-950/80 rounded-2xl p-4 border border-blue-500/25">
+                      <div className="text-[11px] font-800 uppercase tracking-widest text-slate-400 mb-1">
+                        Assigned D-U-N-S® Number
+                      </div>
+                      <div className="text-2xl sm:text-3xl font-900 text-blue-400 tracking-tight font-mono">
+                        86-039-9952
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
 
               {/* Card Footer Action Buttons */}
-              <div className="pt-6 mt-6 border-t border-blue-500/20 flex flex-wrap items-center justify-between gap-3">
-                <button
-                  onClick={() => setSelectedCredential(credentialsData[0])}
-                  className="inline-flex items-center gap-2 text-xs font-700 text-blue-400 hover:text-blue-300 transition-colors"
-                >
-                  <Eye className="w-4 h-4" />
-                  <span>View Details</span>
-                </button>
-                <a
-                  href="/credentials/duns-certificate.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-xs font-700 text-slate-300 hover:text-white transition-colors"
-                >
-                  <ExternalLink className="w-4 h-4" />
-                  <span>Open PDF Document</span>
-                </a>
+              <div className="pt-4 border-t border-blue-500/20 flex flex-wrap items-center justify-between gap-3">
+                <span className="text-xs text-slate-400 font-600 flex items-center gap-1.5">
+                  <ShieldCheck className="w-4 h-4 text-emerald-400" />
+                  Validity: July 2026 – July 2027
+                </span>
+                <div className="flex items-center gap-3">
+                  <button
+                    onClick={() => setSelectedCredential(credentialsData[0])}
+                    className="inline-flex items-center gap-1.5 text-xs font-700 text-blue-400 hover:text-blue-300 transition-colors"
+                  >
+                    <Eye className="w-4 h-4" />
+                    <span>View Details</span>
+                  </button>
+                  <a
+                    href="/credentials/duns-certificate.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-xs font-700 text-slate-300 hover:text-white transition-colors"
+                  >
+                    <ExternalLink className="w-4 h-4" />
+                    <span>Open PDF Document</span>
+                  </a>
+                </div>
               </div>
             </div>
 
