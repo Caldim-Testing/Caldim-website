@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import Image from "next/image";
 import Script from "next/script";
 import { ExternalLink, ShieldCheck, CheckCircle2, X, Eye, Award, Maximize2 } from "lucide-react";
@@ -46,10 +47,16 @@ const credentialsData: CredentialItem[] = [
 export function CompanyCredentials() {
   const [selectedCredential, setSelectedCredential] = useState<CredentialItem | null>(null);
   const [fullscreenImage, setFullscreenImage] = useState<string | null>(null);
+  const [showLiveDnbModal, setShowLiveDnbModal] = useState<boolean>(false);
+  const [mounted, setMounted] = useState<boolean>(false);
 
-  // Lock background scroll whenever modal or fullscreen image is active
   useEffect(() => {
-    if (selectedCredential || fullscreenImage) {
+    setMounted(true);
+  }, []);
+
+  // Lock background scroll whenever any modal or fullscreen image is active
+  useEffect(() => {
+    if (selectedCredential || fullscreenImage || showLiveDnbModal) {
       document.body.style.overflow = "hidden";
       document.body.style.height = "100vh";
       document.body.style.touchAction = "none";
@@ -66,7 +73,7 @@ export function CompanyCredentials() {
       document.body.style.touchAction = "";
       document.documentElement.style.overflow = "";
     };
-  }, [selectedCredential, fullscreenImage]);
+  }, [selectedCredential, fullscreenImage, showLiveDnbModal]);
 
   return (
     <>
@@ -179,9 +186,9 @@ export function CompanyCredentials() {
                 <div className="flex flex-col sm:flex-row items-center gap-5 bg-slate-950/80 rounded-2xl p-5 border border-blue-500/25 mb-6">
                   {/* Scannable D&B Emblem QR Code */}
                   <div 
-                    onClick={() => setFullscreenImage("/credentials/duns-official-qr.png")}
+                    onClick={() => setShowLiveDnbModal(true)}
                     className="relative w-28 h-28 bg-white rounded-2xl p-2 flex items-center justify-center shadow-xl border border-white/20 shrink-0 cursor-pointer group/qr overflow-hidden"
-                    title="Click to expand QR Code"
+                    title="Click to view live Dun & Bradstreet Profile Window"
                   >
                     <Image
                       src="/credentials/duns-official-qr.png"
@@ -197,15 +204,25 @@ export function CompanyCredentials() {
                       Official Verification QR Code
                     </h4>
                     <p className="text-xs text-slate-300 leading-relaxed mb-3">
-                      Scan with any smartphone camera to view CALDIM's live D&B profile.
+                      Scan or click to open live Dun & Bradstreet portal window.
                     </p>
-                    <button
-                      onClick={() => setFullscreenImage("/credentials/duns-official-qr.png")}
-                      className="inline-flex items-center gap-1.5 text-xs font-700 text-blue-400 hover:text-blue-300 transition-colors"
-                    >
-                      <span>Expand QR Code</span>
-                      <Maximize2 className="w-3.5 h-3.5" />
-                    </button>
+                    <div className="flex flex-wrap items-center gap-3">
+                      <button
+                        onClick={() => setShowLiveDnbModal(true)}
+                        className="inline-flex items-center gap-1.5 text-xs font-700 text-blue-400 hover:text-blue-300 transition-colors"
+                      >
+                        <ShieldCheck className="w-4 h-4 text-emerald-400" />
+                        <span>View Live D&B Verification</span>
+                      </button>
+                      <span className="text-slate-600">|</span>
+                      <button
+                        onClick={() => setFullscreenImage("/credentials/duns-official-qr.png")}
+                        className="inline-flex items-center gap-1 text-xs font-600 text-slate-400 hover:text-white transition-colors"
+                      >
+                        <span>Expand QR</span>
+                        <Maximize2 className="w-3 h-3" />
+                      </button>
+                    </div>
                   </div>
                 </div>
 
@@ -228,7 +245,7 @@ export function CompanyCredentials() {
                   D&B Authenticated Portal
                 </span>
                 <button
-                  onClick={() => setSelectedCredential(credentialsData[0])}
+                  onClick={() => setShowLiveDnbModal(true)}
                   className="inline-flex items-center gap-1.5 text-xs font-700 text-blue-400 hover:text-blue-300 transition-colors"
                 >
                   <span>View Full Verification Record</span>
@@ -242,15 +259,15 @@ export function CompanyCredentials() {
       </FadeUp>
 
       {/* Modal Dialog Component */}
-      {selectedCredential && (
+      {mounted && selectedCredential && createPortal(
         <div
-          className="fixed inset-0 z-[99999] flex items-center justify-center p-4 sm:p-6 bg-slate-950/90 backdrop-blur-xl animate-fade-in overflow-hidden"
+          className="fixed inset-0 z-[999999] pt-20 pb-4 sm:pt-24 sm:pb-6 px-3 sm:px-6 flex items-start justify-center bg-slate-950/95 backdrop-blur-2xl animate-fade-in overflow-hidden"
           onClick={() => setSelectedCredential(null)}
           onWheel={(e) => e.stopPropagation()}
           onTouchMove={(e) => e.stopPropagation()}
         >
           <div
-            className="bg-slate-900 rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl border border-blue-500/30 flex flex-col max-h-[85vh] relative animate-scale-up text-white z-[100000]"
+            className="bg-slate-900 rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl border border-blue-500/30 flex flex-col max-h-[82vh] relative animate-scale-up text-white z-[1000000]"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Modal Header */}
@@ -335,13 +352,14 @@ export function CompanyCredentials() {
               </div>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
 
       {/* Fullscreen Document/Seal Image Lightbox Overlay */}
-      {fullscreenImage && (
+      {mounted && fullscreenImage && createPortal(
         <div
-          className="fixed inset-0 z-[99999] flex flex-col items-center justify-center p-4 sm:p-8 bg-slate-950/95 backdrop-blur-xl animate-fade-in overflow-hidden"
+          className="fixed inset-0 z-[999999] flex flex-col items-center justify-center p-4 sm:p-8 bg-slate-950/95 backdrop-blur-2xl animate-fade-in overflow-hidden"
           onClick={() => setFullscreenImage(null)}
           onWheel={(e) => e.stopPropagation()}
           onTouchMove={(e) => e.stopPropagation()}
@@ -349,7 +367,7 @@ export function CompanyCredentials() {
           {/* Prominent High-Visibility Floating Close Button */}
           <button
             onClick={() => setFullscreenImage(null)}
-            className="fixed top-6 right-6 sm:top-8 sm:right-12 z-[100000] p-3.5 bg-slate-900/90 text-white rounded-full hover:bg-blue-600 hover:scale-110 active:scale-95 transition-all duration-200 shadow-2xl border-2 border-blue-400/60 flex items-center justify-center group"
+            className="fixed top-6 right-6 sm:top-8 sm:right-12 z-[1000000] p-3.5 bg-slate-900/90 text-white rounded-full hover:bg-blue-600 hover:scale-110 active:scale-95 transition-all duration-200 shadow-2xl border-2 border-blue-400/60 flex items-center justify-center group"
             aria-label="Close fullscreen preview"
             title="Close Preview (Esc)"
           >
@@ -357,7 +375,7 @@ export function CompanyCredentials() {
           </button>
 
           <div
-            className="relative w-full max-w-5xl h-[85vh] flex items-center justify-center p-2 z-[99999]"
+            className="relative w-full max-w-5xl h-[85vh] flex items-center justify-center p-2 z-[999999]"
             onClick={(e) => e.stopPropagation()}
           >
             <Image
@@ -368,7 +386,101 @@ export function CompanyCredentials() {
               priority
             />
           </div>
-        </div>
+        </div>,
+        document.body
+      )}
+
+      {/* High-Tech Embedded Dun & Bradstreet Live Verification Window */}
+      {mounted && showLiveDnbModal && createPortal(
+        <div
+          className="fixed inset-0 z-[999999] pt-20 pb-4 sm:pt-24 sm:pb-6 px-3 sm:px-6 flex items-start justify-center bg-slate-950/95 backdrop-blur-2xl animate-fade-in overflow-hidden"
+          onClick={() => setShowLiveDnbModal(false)}
+          onWheel={(e) => e.stopPropagation()}
+          onTouchMove={(e) => e.stopPropagation()}
+        >
+          <div
+            className="bg-slate-900 rounded-3xl max-w-4xl w-full h-[calc(100vh-110px)] overflow-hidden shadow-2xl border border-blue-500/40 flex flex-col relative animate-scale-up text-white z-[1000000]"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Window Chrome Header */}
+            <div className="p-4 sm:p-5 border-b border-white/10 flex items-center justify-between bg-slate-950/90 shrink-0">
+              <div className="flex items-center gap-3">
+                <div className="p-2 bg-emerald-500/20 text-emerald-400 rounded-xl border border-emerald-500/30">
+                  <CheckCircle2 className="w-5 h-5" />
+                </div>
+                <div>
+                  <div className="flex items-center gap-2">
+                    <h3 className="text-base sm:text-lg font-800 text-white leading-tight">
+                      Dun & Bradstreet® Live Official Verification
+                    </h3>
+                    <span className="text-[10px] font-800 text-emerald-400 bg-emerald-950/80 px-2 py-0.5 rounded-full border border-emerald-500/30 hidden sm:inline-block">
+                      ● Live D&B Portal Connected
+                    </span>
+                  </div>
+                  <p className="text-xs text-slate-400 font-500">
+                    CALDIM ENGINEERING PRIVATE LIMITED • D-U-N-S® 86-039-9952
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2">
+                <a
+                  href="https://profiles.dunsregistered.com/IndiaBasicProfile.aspx?PaArea=Email&SealkeyQ=E735063204810"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-blue-600/80 hover:bg-blue-500 text-white font-700 text-xs transition-colors border border-blue-400/40"
+                  title="Open in new browser window"
+                >
+                  <span>Open External Portal</span>
+                  <ExternalLink className="w-3.5 h-3.5" />
+                </a>
+                <button
+                  onClick={() => setShowLiveDnbModal(false)}
+                  className="p-2 text-slate-300 hover:text-white hover:bg-slate-800 rounded-full transition-colors border border-white/10"
+                  aria-label="Close verification modal"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+            </div>
+
+            {/* Embedded Live D&B Iframe Container */}
+            <div className="flex-1 w-full bg-white relative overflow-hidden">
+              <iframe
+                src="https://profiles.dunsregistered.com/IndiaBasicProfile.aspx?PaArea=Email&SealkeyQ=E735063204810"
+                title="Live Dun & Bradstreet Verification Profile"
+                className="w-full h-full border-0"
+                loading="lazy"
+              />
+            </div>
+
+            {/* Modal Footer */}
+            <div className="p-3 sm:p-4 border-t border-white/10 bg-slate-950/90 flex flex-wrap items-center justify-between gap-2 shrink-0">
+              <span className="text-xs text-slate-400 font-600 flex items-center gap-1.5">
+                <ShieldCheck className="w-4 h-4 text-emerald-400" />
+                Dun & Bradstreet Authenticated Record
+              </span>
+              <div className="flex items-center gap-2">
+                <a
+                  href="https://profiles.dunsregistered.com/IndiaBasicProfile.aspx?PaArea=Email&SealkeyQ=E735063204810"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="sm:hidden inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-blue-600 text-white text-xs font-700"
+                >
+                  <span>Open External</span>
+                  <ExternalLink className="w-3 h-3" />
+                </a>
+                <button
+                  onClick={() => setShowLiveDnbModal(false)}
+                  className="px-4 py-1.5 rounded-xl bg-slate-800 text-slate-300 hover:text-white font-700 text-xs hover:bg-slate-700 transition-colors border border-white/10"
+                >
+                  Close Window
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>,
+        document.body
       )}
     </>
   );
