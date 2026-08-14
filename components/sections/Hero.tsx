@@ -8,46 +8,63 @@ import { FadeUp } from "../animations/Animations";
 
 /* ─── Animated Hero SVG Dashboard ─────────────────────────────── */
 const HeroDashboard: React.FC = () => {
-  const [activeTab, setActiveTab] = React.useState<string>("Dashboard");
+  const [activeTab, setActiveTab] = React.useState<string>("CALTIMS");
 
-  const navItems = [
-    { icon: BarChart3, label: "Dashboard", id: "Dashboard" },
-    { icon: GitBranch, label: "Workflows", id: "Workflows" },
-    { icon: Shield, label: "Security", id: "Security" },
-    { icon: Cpu, label: "AI Engine", id: "AI Engine" },
-    { icon: Zap, label: "Automation", id: "Automation" },
+  const productTabs = [
+    { id: "CALTIMS", label: "CALTIMS", fullLabel: "CALTIMS Payroll", badge: "99.8% Automated", icon: BarChart3, color: "var(--accent-light)", path: "caltims-payroll" },
+    { id: "CALRIMS", label: "CALRIMS", fullLabel: "CALRIMS AI HR", badge: "Voice AI Active", icon: Cpu, color: "#F59E0B", path: "calrims-ai-recruitment" },
+    { id: "CALBUY", label: "CALBUY", fullLabel: "CALBUY Sourcing", badge: "Auto-Vendor Bidding", icon: Zap, color: "#10B981", path: "calbuy-procurement" },
+    { id: "Workflows", label: "Workflows", fullLabel: "Enterprise Flow", badge: "Telemetry Velocity", icon: GitBranch, color: "#A855F7", path: "workflows-automation" },
+    { id: "Security", label: "Security", fullLabel: "Data Governance", badge: "256-bit Encryption", icon: Shield, color: "#3B82F6", path: "security-compliance" },
   ];
 
   return (
     <div className="relative w-full max-w-xl mx-auto lg:max-w-none">
       {/* Outer glow */}
-      <div className="absolute inset-0 bg-[var(--accent)] opacity-10 blur-3xl rounded-3xl scale-95" />
+      <div className="absolute inset-0 bg-[var(--accent)] opacity-15 blur-3xl rounded-3xl scale-95" />
 
       {/* Browser frame */}
       <motion.div
         initial={{ opacity: 0, y: 40, scale: 0.95 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ duration: 0.8, delay: 0.4, ease: [0.21, 0.47, 0.32, 0.98] }}
-        className="relative rounded-2xl overflow-hidden border border-white/15 shadow-2xl max-w-full w-full"
-        style={{ background: "rgba(7,27,52,0.85)", backdropFilter: "blur(16px)" }}
+        className="relative rounded-2xl overflow-hidden border border-blue-400/30 shadow-2xl max-w-full w-full"
+        style={{ background: "rgba(7,27,52,0.92)", backdropFilter: "blur(16px)" }}
       >
-        {/* Browser chrome */}
-        <div className="flex items-center gap-2 px-4 py-3 border-b border-white/10" style={{ background: "rgba(255,255,255,0.04)" }}>
-          <div className="flex gap-1.5">
-            <div className="w-3 h-3 rounded-full bg-red-400/80" />
-            <div className="w-3 h-3 rounded-full bg-yellow-400/80" />
-            <div className="w-3 h-3 rounded-full bg-green-400/80" />
+        {/* Top Product Switcher Header Bar */}
+        <div className="bg-slate-950/80 px-3 py-2 border-b border-white/10 flex items-center justify-between gap-2 overflow-x-auto custom-scrollbar">
+          <div className="flex items-center gap-1.5 shrink-0">
+            <span className="w-2.5 h-2.5 rounded-full bg-red-500/80 inline-block" />
+            <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/80 inline-block" />
+            <span className="w-2.5 h-2.5 rounded-full bg-green-500/80 inline-block" />
           </div>
-          <div className="flex-1 mx-4 flex items-center gap-1.5 bg-white/8 rounded-md px-3 py-1">
-            <div className="w-2.5 h-2.5 rounded-full bg-green-400 animate-pulse" />
-            <span className="text-white/60 text-xs font-mono transition-all duration-300">
-              portal.caldim.software/{activeTab.toLowerCase().replace(/\s+/g, "-")}
-            </span>
+
+          {/* Interactive Product Tabs */}
+          <div className="flex items-center gap-1 sm:gap-1.5 shrink-0">
+            {productTabs.map((tab) => {
+              const active = activeTab === tab.id;
+              const Icon = tab.icon;
+              return (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  type="button"
+                  className={`px-2.5 sm:px-3 py-1 rounded-lg text-xs font-700 transition-all duration-200 cursor-pointer flex items-center gap-1.5 border ${
+                    active
+                      ? "bg-blue-600/90 text-white border-blue-400/50 shadow-md shadow-blue-500/30 scale-[1.03]"
+                      : "text-white/60 hover:text-white hover:bg-white/10 border-transparent"
+                  }`}
+                >
+                  <Icon size={12} className={active ? "text-white" : "text-white/60"} />
+                  <span>{tab.label}</span>
+                </button>
+              );
+            })}
           </div>
-          <div className="flex gap-1">
-            <div className="w-1.5 h-1.5 rounded-full bg-white/20" />
-            <div className="w-1.5 h-1.5 rounded-full bg-white/20" />
-            <div className="w-1.5 h-1.5 rounded-full bg-white/20" />
+
+          <div className="hidden md:flex items-center gap-1 text-[10px] font-mono text-white/50 bg-white/5 px-2.5 py-1 rounded-md border border-white/10 shrink-0">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+            <span>portal.caldim.software/{productTabs.find(t => t.id === activeTab)?.path}</span>
           </div>
         </div>
 
@@ -59,10 +76,10 @@ const HeroDashboard: React.FC = () => {
               <div className="w-5 h-5 rounded bg-[var(--accent)] flex items-center justify-center shadow-sm shadow-[var(--accent)]/50">
                 <span className="text-white text-xs font-bold">C</span>
               </div>
-              <span className="text-white text-xs font-700 tracking-wide">CALDIM Core</span>
+              <span className="text-white text-xs font-700 tracking-wide">CALDIM Suite</span>
             </div>
             <div className="flex sm:flex-col gap-1.5 w-full">
-              {navItems.map(({ icon: Icon, label, id }) => {
+              {productTabs.map(({ icon: Icon, label, id, badge }) => {
                 const active = activeTab === id;
                 return (
                   <button
@@ -90,9 +107,9 @@ const HeroDashboard: React.FC = () => {
 
           {/* Main content */}
           <div className="flex-1 p-3 sm:p-4 flex flex-col gap-3.5 overflow-hidden">
-            {activeTab === "Dashboard" && (
+            {activeTab === "CALTIMS" && (
               <motion.div
-                key="Dashboard"
+                key="CALTIMS"
                 initial={{ opacity: 0, x: 12 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.25 }}
@@ -186,6 +203,121 @@ const HeroDashboard: React.FC = () => {
                         <span className="text-white/60 truncate">{log.msg}</span>
                       </div>
                     ))}
+                  </div>
+                </div>
+              </motion.div>
+            )}
+
+            {activeTab === "CALRIMS" && (
+              <motion.div
+                key="CALRIMS"
+                initial={{ opacity: 0, x: 12 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.25 }}
+                className="flex flex-col gap-3.5 h-full"
+              >
+                {/* Metric cards row */}
+                <div className="grid grid-cols-3 gap-1.5 sm:gap-3">
+                  {[
+                    { fullLabel: "Voice AI Screened", value: "1,240", delta: "Candidates Audited", color: "#F59E0B" },
+                    { fullLabel: "Time-to-Hire", value: "-65%", delta: "Automated Shortlist", color: "#10B981" },
+                    { fullLabel: "Voice Accuracy", value: "98.4%", delta: "Technical Speech AI", color: "var(--accent-light)" },
+                  ].map((metric) => (
+                    <div
+                      key={metric.fullLabel}
+                      className="rounded-lg p-1.5 sm:p-2.5 transition-all hover:bg-white/8 text-center sm:text-left overflow-hidden bg-white/5 border border-white/10"
+                    >
+                      <div className="text-white/50 text-[9px] sm:text-[11px] mb-0.5 truncate">{metric.fullLabel}</div>
+                      <div className="text-white font-700 text-sm sm:text-lg leading-none truncate">{metric.value}</div>
+                      <div className="text-[8px] sm:text-[10px] mt-1 font-600 truncate" style={{ color: metric.color }}>{metric.delta}</div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* CALRIMS AI Voice Pipeline Box */}
+                <div className="rounded-lg p-3 flex-1 flex flex-col justify-between bg-white/4 border border-white/6">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-white/80 text-xs font-700 flex items-center gap-1.5">
+                      <Cpu size={13} className="text-[#F59E0B]" />
+                      CALRIMS Autonomous Voice & Resume Pipeline
+                    </span>
+                    <span className="text-[10px] font-700 text-[#F59E0B] bg-[#F59E0B]/20 px-2 py-0.5 rounded-full flex items-center gap-1">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#F59E0B] animate-ping" />
+                      Voice AI Active
+                    </span>
+                  </div>
+
+                  <div className="space-y-2 py-1">
+                    <div className="bg-slate-950/60 p-2.5 rounded-lg border border-amber-500/30 flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <div className="w-2.5 h-2.5 rounded-full bg-amber-400 animate-pulse" />
+                        <div>
+                          <div className="text-white font-700 text-xs">Voice AI Assessment: Sr. Mechanical Engineer</div>
+                          <div className="text-white/50 text-[10px]">Analyzing 48 technical competency indicators...</div>
+                        </div>
+                      </div>
+                      <span className="text-amber-400 font-mono font-700 text-xs">88.5% Score</span>
+                    </div>
+
+                    <div className="bg-slate-950/40 p-2 rounded-lg border border-white/5 flex items-center justify-between text-[11px]">
+                      <span className="text-white/70">Candidate #1042: Shortlist recommendation ready</span>
+                      <span className="text-emerald-400 font-600 text-[10px]">Auto-Scheduled</span>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+
+            {activeTab === "CALBUY" && (
+              <motion.div
+                key="CALBUY"
+                initial={{ opacity: 0, x: 12 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.25 }}
+                className="flex flex-col gap-3.5 h-full"
+              >
+                {/* Metric cards row */}
+                <div className="grid grid-cols-3 gap-1.5 sm:gap-3">
+                  {[
+                    { fullLabel: "Procurement Savings", value: "12%", delta: "Vendor Auto-Bidding", color: "#10B981" },
+                    { fullLabel: "Active PO Volume", value: "₹4.2Cr", delta: "15 Tons TMT Steel", color: "var(--accent-light)" },
+                    { fullLabel: "Compliance Score", value: "100%", delta: "Automated Auditing", color: "#F59E0B" },
+                  ].map((metric) => (
+                    <div
+                      key={metric.fullLabel}
+                      className="rounded-lg p-1.5 sm:p-2.5 transition-all hover:bg-white/8 text-center sm:text-left overflow-hidden bg-white/5 border border-white/10"
+                    >
+                      <div className="text-white/50 text-[9px] sm:text-[11px] mb-0.5 truncate">{metric.fullLabel}</div>
+                      <div className="text-white font-700 text-sm sm:text-lg leading-none truncate">{metric.value}</div>
+                      <div className="text-[8px] sm:text-[10px] mt-1 font-600 truncate" style={{ color: metric.color }}>{metric.delta}</div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* CALBUY Live Bidding Engine */}
+                <div className="rounded-lg p-3 flex-1 flex flex-col justify-between bg-white/4 border border-white/6">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-white/80 text-xs font-700 flex items-center gap-1.5">
+                      <Zap size={13} className="text-[#10B981]" />
+                      CALBUY Real-Time Vendor Sourcing & Bidding Engine
+                    </span>
+                    <span className="text-[10px] font-700 text-[#10B981] bg-[#10B981]/20 px-2 py-0.5 rounded-full flex items-center gap-1">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#10B981] animate-ping" />
+                      Auto-Bidding Active
+                    </span>
+                  </div>
+
+                  <div className="space-y-2 py-1">
+                    <div className="bg-slate-950/60 p-2.5 rounded-lg border border-emerald-500/30 flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <div className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
+                        <div>
+                          <div className="text-white font-700 text-xs">RFQ #4092: Industrial Automation Components</div>
+                          <div className="text-white/50 text-[10px]">Lowest bid received: Vendor B (Saved ₹1,45,000)</div>
+                        </div>
+                      </div>
+                      <span className="text-emerald-400 font-mono font-700 text-xs">PO Generated</span>
+                    </div>
                   </div>
                 </div>
               </motion.div>
