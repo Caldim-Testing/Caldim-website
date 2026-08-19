@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import Image from "next/image";
-import Script from "next/script";
 import { ExternalLink, ShieldCheck, CheckCircle2, X, Eye, Award, Maximize2 } from "lucide-react";
 import { FadeUp } from "@/components/animations/Animations";
 
@@ -78,10 +77,6 @@ export function CompanyCredentials() {
 
   return (
     <>
-      {/* Official Dun & Bradstreet Live Verification & QR Code Scripts */}
-      <Script src="https://dunsregistered.dnb.com" strategy="lazyOnload" />
-      <Script src="https://dunsregistered.dnb.com/QRcode.js?QRW=100&QRH=100" strategy="lazyOnload" />
-
       <FadeUp delay={0.15} className="mt-12">
         <div id="credentials" className="bg-[var(--navy)] text-white rounded-3xl p-6 sm:p-8 md:p-12 shadow-2xl border border-blue-400/20 relative overflow-hidden">
           {/* Ambient background decorative glows */}

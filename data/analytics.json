@@ -1,9 +1,9 @@
 {
   "pageViews": {
-    "/": 38,
-    "/about": 48,
+    "/": 45,
+    "/about": 55,
     "/services": 3,
-    "/products": 0,
+    "/products": 1,
     "/contact": 4,
     "/industries": 3
   },
@@ -11,66 +11,6 @@
     "consultation_booked": 1
   },
   "logs": [
-    {
-      "timestamp": "2026-07-16T08:47:13.074Z",
-      "action": "Page View",
-      "details": "/"
-    },
-    {
-      "timestamp": "2026-07-16T09:57:37.313Z",
-      "action": "Page View",
-      "details": "/industries"
-    },
-    {
-      "timestamp": "2026-07-16T10:08:16.210Z",
-      "action": "Page View",
-      "details": "/"
-    },
-    {
-      "timestamp": "2026-07-16T10:08:26.387Z",
-      "action": "Page View",
-      "details": "/about"
-    },
-    {
-      "timestamp": "2026-07-16T10:08:32.239Z",
-      "action": "Page View",
-      "details": "/"
-    },
-    {
-      "timestamp": "2026-07-16T10:13:08.784Z",
-      "action": "Page View",
-      "details": "/about"
-    },
-    {
-      "timestamp": "2026-07-16T10:23:23.756Z",
-      "action": "Page View",
-      "details": "/industries"
-    },
-    {
-      "timestamp": "2026-07-16T11:01:19.107Z",
-      "action": "Page View",
-      "details": "/contact"
-    },
-    {
-      "timestamp": "2026-07-16T11:10:34.702Z",
-      "action": "Event Trigger",
-      "details": "consultation_booked"
-    },
-    {
-      "timestamp": "2026-07-16T12:00:00.837Z",
-      "action": "Page View",
-      "details": "/contact"
-    },
-    {
-      "timestamp": "2026-07-16T12:19:01.313Z",
-      "action": "Page View",
-      "details": "/"
-    },
-    {
-      "timestamp": "2026-07-16T12:45:15.401Z",
-      "action": "Page View",
-      "details": "/"
-    },
     {
       "timestamp": "2026-07-16T13:08:34.848Z",
       "action": "Page View",
@@ -495,6 +435,81 @@
       "timestamp": "2026-08-11T11:10:39.266Z",
       "action": "Page View",
       "details": "/about"
+    },
+    {
+      "timestamp": "2026-08-14T12:43:30.599Z",
+      "action": "Page View",
+      "details": "/about"
+    },
+    {
+      "timestamp": "2026-08-14T12:43:55.954Z",
+      "action": "Page View",
+      "details": "/about"
+    },
+    {
+      "timestamp": "2026-08-14T12:44:44.565Z",
+      "action": "Page View",
+      "details": "/about"
+    },
+    {
+      "timestamp": "2026-08-14T12:53:42.370Z",
+      "action": "Page View",
+      "details": "/about"
+    },
+    {
+      "timestamp": "2026-08-14T12:57:25.785Z",
+      "action": "Page View",
+      "details": "/about"
+    },
+    {
+      "timestamp": "2026-08-14T12:58:35.010Z",
+      "action": "Page View",
+      "details": "/about"
+    },
+    {
+      "timestamp": "2026-08-14T13:13:47.421Z",
+      "action": "Page View",
+      "details": "/about"
+    },
+    {
+      "timestamp": "2026-08-18T13:17:53.273Z",
+      "action": "Page View",
+      "details": "/"
+    },
+    {
+      "timestamp": "2026-08-18T13:18:00.461Z",
+      "action": "Page View",
+      "details": "/"
+    },
+    {
+      "timestamp": "2026-08-18T13:31:16.718Z",
+      "action": "Page View",
+      "details": "/products"
+    },
+    {
+      "timestamp": "2026-08-18T13:31:16.937Z",
+      "action": "Page View",
+      "details": "/"
+    },
+    {
+      "timestamp": "2026-08-18T13:34:02.708Z",
+      "action": "Page View",
+      "details": "/"
+    },
+    {
+      "timestamp": "2026-08-19T04:12:06.394Z",
+      "action": "Page View",
+      "details": "/"
+    },
+    {
+      "timestamp": "2026-08-19T04:16:26.643Z",
+      "action": "Page View",
+      "details": "/"
+    },
+    {
+      "timestamp": "2026-08-19T04:19:04.124Z",
+      "action": "Page View",
+      "details": "/"
     }
   ]
 }
