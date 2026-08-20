@@ -33,21 +33,43 @@ export default function ProductsPage() {
   const [selectedId, setSelectedId] = useState<string>("caltims");
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
 
+  // Sync initial product from URL search params (e.g. ?product=calbuy)
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const paramId = params.get("product") || params.get("id");
+      if (paramId && staticProducts.some((p) => p.id === paramId)) {
+        setSelectedId(paramId);
+      }
+    }
+  }, []);
+
+  // Update browser address bar dynamically without page reload
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const currentUrl = new URL(window.location.href);
+      if (currentUrl.searchParams.get("product") !== selectedId) {
+        currentUrl.searchParams.set("product", selectedId);
+        window.history.replaceState(null, "", currentUrl.pathname + currentUrl.search);
+      }
+    }
+  }, [selectedId]);
+
   useEffect(() => {
     fetch("/api/admin/products")
-      .then(res => {
+      .then((res) => {
         if (res.ok) return res.json();
       })
-      .then(data => {
+      .then((data) => {
         if (data && Array.isArray(data) && data.length > 0) {
           setProductsList(data);
           // If the selected product is not in the list, select the first one
-          if (!data.some(p => p.id === selectedId)) {
+          if (!data.some((p) => p.id === selectedId)) {
             setSelectedId(data[0].id);
           }
         }
       })
-      .catch(err => console.error("Error refreshing products list:", err));
+      .catch((err) => console.error("Error refreshing products list:", err));
   }, []);
 
   // Reset video playback on product change
