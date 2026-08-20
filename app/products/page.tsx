@@ -33,28 +33,13 @@ export default function ProductsPage() {
   const [selectedId, setSelectedId] = useState<string>("caltims");
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
 
-  const selectProduct = (id: string, autoPlay = true) => {
-    setSelectedId(id);
-    if (autoPlay) {
-      setIsPlaying(true);
-    }
-    if (typeof window !== "undefined") {
-      setTimeout(() => {
-        const stageEl = document.getElementById("video-stage");
-        if (stageEl) {
-          stageEl.scrollIntoView({ behavior: "smooth", block: "start" });
-        }
-      }, 100);
-    }
-  };
-
   // Sync initial product from URL search params (e.g. ?product=calbuy)
   useEffect(() => {
     if (typeof window !== "undefined") {
       const params = new URLSearchParams(window.location.search);
       const paramId = params.get("product") || params.get("id");
       if (paramId && staticProducts.some((p) => p.id === paramId)) {
-        selectProduct(paramId, true);
+        setSelectedId(paramId);
       }
     }
   }, []);
@@ -177,7 +162,7 @@ export default function ProductsPage() {
         </section>
 
         {/* 1. THE CINEMATIC SPLIT-SCREEN COMMAND CONSOLE (Zero Cards!) */}
-        <section id="video-stage" className="py-12 md:py-16 bg-[var(--navy)] text-white border-y border-white/10 relative overflow-hidden">
+        <section className="py-12 md:py-16 bg-[var(--navy)] text-white border-y border-white/10 relative overflow-hidden">
           {/* Subtle background glow */}
           <div className="absolute top-0 right-1/4 w-[600px] h-[600px] bg-blue-600/10 rounded-full blur-[140px] pointer-events-none" />
           <div className="absolute bottom-0 left-10 w-[400px] h-[400px] bg-purple-600/10 rounded-full blur-[120px] pointer-events-none" />
@@ -197,7 +182,7 @@ export default function ProductsPage() {
                     return (
                       <button
                         key={item.id}
-                        onClick={() => selectProduct(item.id, true)}
+                        onClick={() => setSelectedId(item.id)}
                         className={`min-w-[200px] sm:min-w-[240px] lg:min-w-0 lg:w-full text-left p-2.5 sm:p-3 rounded-xl flex items-center justify-between border transition-all duration-300 group shrink-0 ${
                           isSelected 
                             ? "bg-white/10 border-white/20 shadow-lg" 
