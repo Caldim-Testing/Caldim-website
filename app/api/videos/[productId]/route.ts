@@ -21,9 +21,16 @@ export async function GET(
     return NextResponse.redirect(product.videoUrl);
   }
 
-  // The videoUrl is like "/Product Videos/filename.mp4"
-  // We need to resolve this to the actual file path in the "public" directory
-  const filePath = path.join(process.cwd(), "public", product.videoUrl);
+  // Resolve file path relative to current working directory (e.g. public/Product Videos/filename.mp4)
+  let filePath = path.join(process.cwd(), "public", product.videoUrl);
+
+  // VPS Fallback: If not found, check exact Linux server directory
+  if (!fs.existsSync(filePath)) {
+    const vpsPath = path.join("/var/www/Expo-Page/public", product.videoUrl);
+    if (fs.existsSync(vpsPath)) {
+      filePath = vpsPath;
+    }
+  }
 
   try {
     const stat = fs.statSync(filePath);
