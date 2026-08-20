@@ -177,20 +177,137 @@ body {
 
 .container-wide {
   width: 100%;
-  max-width: 100%;
+  max-width: 1280px;
   margin-left: auto;
   margin-right: auto;
-  padding-left: clamp(1rem, 3.5vw, 4rem);
-  padding-right: clamp(1rem, 3.5vw, 4rem);
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 .container-narrow {
   width: 100%;
-  max-width: 100%;
+  max-width: 960px;
   margin-left: auto;
   margin-right: auto;
-  padding-left: clamp(1rem, 3.5vw, 4rem);
-  padding-right: clamp(1rem, 3.5vw, 4rem);
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+/* ═══════════════════════════════════════
+   RESPONSIVE CONTAINER BREAKPOINTS
+═══════════════════════════════════════ */
+
+/* Tablets (640px+) */
+@media (min-width: 640px) {
+  .container-wide {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+  .container-narrow {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+/* Laptops (1024px+) — current design baseline */
+@media (min-width: 1024px) {
+  .container-wide {
+    max-width: 1280px;
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+  .container-narrow {
+    max-width: 960px;
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+}
+
+/* Desktop monitors (1280px+) — restore original clamp-based padding */
+@media (min-width: 1280px) {
+  .container-wide {
+    max-width: 1400px;
+    padding-left: clamp(2rem, 3.5vw, 5rem);
+    padding-right: clamp(2rem, 3.5vw, 5rem);
+  }
+  .container-narrow {
+    max-width: 1080px;
+    padding-left: clamp(2rem, 3.5vw, 5rem);
+    padding-right: clamp(2rem, 3.5vw, 5rem);
+  }
+}
+
+/* Ultra-wide (1536px+) — restore original proportional padding */
+@media (min-width: 1536px) {
+  .container-wide {
+    max-width: 1600px;
+    padding-left: clamp(3rem, 4vw, 6rem);
+    padding-right: clamp(3rem, 4vw, 6rem);
+  }
+  .container-narrow {
+    max-width: 1280px;
+    padding-left: clamp(3rem, 4vw, 6rem);
+    padding-right: clamp(3rem, 4vw, 6rem);
+  }
+}
+
+/* ═══════════════════════════════════════
+   MOBILE-SPECIFIC OVERRIDES (<640px)
+═══════════════════════════════════════ */
+
+@media (max-width: 639px) {
+  /* Section padding — compact on mobile */
+  .section-padding {
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+  }
+
+  /* Typography — mobile sizes */
+  .text-hero {
+    font-size: 1.65rem;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+  }
+
+  .text-section-title {
+    font-size: 1.35rem;
+    line-height: 1.25;
+  }
+
+  .text-body-lg {
+    font-size: 0.9375rem;
+    line-height: 1.65;
+  }
+
+  .text-body {
+    font-size: 0.875rem;
+    line-height: 1.65;
+  }
+
+  /* Buttons — full-width stacking on mobile */
+  .btn {
+    padding: 0.625rem 1.25rem;
+    font-size: 0.875rem;
+    min-height: 40px;
+  }
+
+  .btn-lg {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.9375rem;
+  }
+
+  /* Cards — reduced padding */
+  .card {
+    padding: 1rem;
+    border-radius: 1rem;
+  }
+
+  /* Badge — smaller on mobile */
+  .badge {
+    font-size: 0.625rem;
+    padding: 0.2rem 0.625rem;
+    gap: 0.25rem;
+  }
 }
 
 /* ═══════════════════════════════════════
@@ -331,11 +448,11 @@ body {
 
 .fluid-container {
   width: 100%;
-  max-width: 100%;
+  max-width: 1280px;
   margin-left: auto;
   margin-right: auto;
-  padding-left: clamp(1rem, 3.5vw, 4rem);
-  padding-right: clamp(1rem, 3.5vw, 4rem);
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 /* ═══════════════════════════════════════

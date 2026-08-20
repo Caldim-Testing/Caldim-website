@@ -90,7 +90,7 @@ export const Footer: React.FC = () => {
           <div className="lg:col-span-6 grid grid-cols-2 sm:grid-cols-4 gap-6">
             {Object.entries(footerLinks).map(([category, links]) => (
               <div key={category}>
-                <h3 className="text-white font-800 text-xs mb-3.5 uppercase tracking-wider text-blue-300">{category}</h3>
+                <h3 className="text-white font-800 text-[10px] sm:text-xs mb-2.5 sm:mb-3.5 uppercase tracking-wider text-blue-300">{category}</h3>
                 <ul className="flex flex-col gap-2">
                   {links.map((link) => (
                     <li key={link.href}>
@@ -149,7 +149,7 @@ export const Footer: React.FC = () => {
                 <MapPin size={18} className="animate-bounce" />
               </div>
               <div>
-                <h3 className="text-sm sm:text-base font-900 uppercase tracking-wider text-white">
+                <h3 className="text-xs sm:text-sm md:text-base font-900 uppercase tracking-wider text-white">
                   OUR CORPORATE OFFICES & LOCATIONS
                 </h3>
                 <p className="text-[11px] text-blue-300/80 font-500">
@@ -157,14 +157,14 @@ export const Footer: React.FC = () => {
                 </p>
               </div>
             </div>
-            <span className="text-[11px] font-700 bg-blue-950/80 text-blue-300 px-3 py-1 rounded-full border border-blue-500/30 shadow-sm">
+            <span className="text-[10px] sm:text-[11px] font-700 bg-blue-950/80 text-blue-300 px-2 sm:px-3 py-1 rounded-full border border-blue-500/30 shadow-sm">
               📍 Direct Contact & On-Site Consultation
             </span>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Chennai Head Office Card */}
-            <div className="group bg-gradient-to-br from-slate-900/95 via-blue-950/70 to-slate-900/95 rounded-2xl p-5 border-2 border-blue-500/40 shadow-2xl hover:border-blue-400 hover:shadow-blue-500/20 hover:-translate-y-1 transition-all duration-300 relative overflow-hidden">
+            <div className="group bg-gradient-to-br from-slate-900/95 via-blue-950/70 to-slate-900/95 rounded-xl sm:rounded-2xl p-4 sm:p-5 border-2 border-blue-500/40 shadow-2xl hover:border-blue-400 hover:shadow-blue-500/20 hover:-translate-y-1 transition-all duration-300 relative overflow-hidden">
               <div className="absolute top-0 right-0 w-36 h-36 bg-blue-500/15 rounded-full blur-2xl group-hover:bg-blue-500/25 transition-all pointer-events-none" />
               
               <div className="flex items-center justify-between mb-3 relative z-10">
@@ -173,11 +173,11 @@ export const Footer: React.FC = () => {
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-3 w-3 bg-blue-500"></span>
                   </span>
-                  <h4 className="text-sm font-900 text-white tracking-wide">
+                  <h4 className="text-xs sm:text-sm font-900 text-white tracking-wide">
                     CHENNAI — HEAD OFFICE
                   </h4>
                 </div>
-                <span className="text-[10px] font-800 text-blue-200 bg-blue-600/30 border border-blue-400/50 px-3 py-1 rounded-full uppercase tracking-wider shadow-sm">
+                <span className="text-[9px] sm:text-[10px] font-800 text-blue-200 bg-blue-600/30 border border-blue-400/50 px-2 sm:px-3 py-1 rounded-full uppercase tracking-wider shadow-sm">
                   Headquarters
                 </span>
               </div>
@@ -199,7 +199,7 @@ export const Footer: React.FC = () => {
             </div>
 
             {/* Hosur Branch Office Card */}
-            <div className="group bg-gradient-to-br from-slate-900/95 via-blue-950/70 to-slate-900/95 rounded-2xl p-5 border-2 border-blue-500/40 shadow-2xl hover:border-blue-400 hover:shadow-blue-500/20 hover:-translate-y-1 transition-all duration-300 relative overflow-hidden">
+            <div className="group bg-gradient-to-br from-slate-900/95 via-blue-950/70 to-slate-900/95 rounded-xl sm:rounded-2xl p-4 sm:p-5 border-2 border-blue-500/40 shadow-2xl hover:border-blue-400 hover:shadow-blue-500/20 hover:-translate-y-1 transition-all duration-300 relative overflow-hidden">
               <div className="absolute top-0 right-0 w-36 h-36 bg-blue-500/15 rounded-full blur-2xl group-hover:bg-blue-500/25 transition-all pointer-events-none" />
               
               <div className="flex items-center justify-between mb-3 relative z-10">
@@ -208,11 +208,11 @@ export const Footer: React.FC = () => {
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-3 w-3 bg-blue-500"></span>
                   </span>
-                  <h4 className="text-sm font-900 text-white tracking-wide">
+                  <h4 className="text-xs sm:text-sm font-900 text-white tracking-wide">
                     HOSUR — BRANCH OFFICE
                   </h4>
                 </div>
-                <span className="text-[10px] font-800 text-blue-200 bg-blue-600/30 border border-blue-400/50 px-3 py-1 rounded-full uppercase tracking-wider shadow-sm">
+                <span className="text-[9px] sm:text-[10px] font-800 text-blue-200 bg-blue-600/30 border border-blue-400/50 px-2 sm:px-3 py-1 rounded-full uppercase tracking-wider shadow-sm">
                   Branch Office
                 </span>
               </div>

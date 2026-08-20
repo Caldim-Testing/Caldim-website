@@ -267,7 +267,7 @@ export const Navbar: React.FC = () => {
                   >
                     <Link
                       href={item.href}
-                      className={`flex items-center gap-1.5 px-4 py-2 rounded-full text-[11px] font-800 tracking-wider uppercase transition-all duration-300 ${
+                      className={`flex items-center gap-1.5 px-4 py-2 rounded-full text-[11px] xl:text-[12px] font-800 tracking-wider uppercase transition-all duration-300 ${
                         isActive
                           ? "bg-white/10 text-white"
                           : isCurrentActive

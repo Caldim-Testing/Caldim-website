@@ -172,7 +172,7 @@ export const IndustriesSection: React.FC = () => {
   return (
     <section 
       id="industries" 
-      className="py-24 bg-[#020c1b] text-white relative overflow-hidden border-b border-slate-900"
+      className="py-12 sm:py-16 md:py-20 lg:py-24 bg-[#020c1b] text-white relative overflow-hidden border-b border-slate-900"
       aria-labelledby="industries-heading"
     >
       {/* Faint Technical Grid Background */}
@@ -186,10 +186,10 @@ export const IndustriesSection: React.FC = () => {
             <div className="badge mb-4 border-blue-900/50 bg-blue-900/20 text-blue-300 uppercase tracking-widest text-xs">
               Core Target Verticals
             </div>
-            <h2 id="industries-heading" className="text-4xl md:text-5xl font-900 text-white tracking-tight mb-4">
+            <h2 id="industries-heading" className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-900 text-white tracking-tight mb-3 sm:mb-4">
               Built for Industrial Complexity
             </h2>
-            <p className="text-slate-400 font-500 text-base md:text-lg leading-relaxed">
+            <p className="text-slate-400 font-500 text-sm sm:text-base md:text-lg leading-relaxed">
               Every module is tailored to sync your physical operations with secure, enterprise-grade cloud systems. Swipe or click to inspect all 6 sectors.
             </p>
           </FadeUp>
@@ -228,7 +228,7 @@ export const IndustriesSection: React.FC = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-80px" }}
                 transition={{ duration: 0.5, delay: i * 0.08 }}
-                className="w-[310px] sm:w-[350px] md:w-[380px] shrink-0 snap-start h-full"
+                className="w-[260px] sm:w-[310px] md:w-[350px] lg:w-[380px] shrink-0 snap-start h-full"
               >
                 <Link
                   href={ind.href}

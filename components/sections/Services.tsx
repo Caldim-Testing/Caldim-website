@@ -125,24 +125,24 @@ export const ServicesSection: React.FC = () => {
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(59,130,246,0.05)_0%,transparent_70%)] pointer-events-none" />
 
       <div className="container-wide relative z-10">
-        <FadeUp className="mb-16 md:mb-24 flex flex-col md:flex-row md:items-end justify-between gap-8">
+        <FadeUp className="mb-10 md:mb-16 lg:mb-24 flex flex-col md:flex-row md:items-end justify-between gap-6 md:gap-8">
           <div className="max-w-2xl">
             <div className="badge badge-accent mb-4 border-blue-900/50 bg-blue-900/20 text-blue-300 uppercase tracking-widest text-xs">Engineering Ecosystem</div>
-            <h2 id="services-heading" className="text-4xl md:text-5xl font-900 text-white tracking-tight">
+            <h2 id="services-heading" className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-900 text-white tracking-tight">
               Full-Stack Digital Services
             </h2>
           </div>
-          <p className="text-lg text-slate-400 max-w-md leading-relaxed">
+          <p className="text-sm sm:text-base lg:text-lg text-slate-400 max-w-md leading-relaxed">
             From concept to deployment, we deliver end-to-end software solutions that solve real business problems with engineering discipline.
           </p>
         </FadeUp>
 
-        <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-start">
           
           {/* Left Side: Command Center Tabs */}
-          <div className="lg:col-span-4 flex flex-col gap-2 relative">
-            {/* Persistent glowing track line */}
-            <div className="absolute left-[18px] top-4 bottom-4 w-px bg-slate-800/80 rounded-full" />
+          <div className="lg:col-span-4 flex flex-row lg:flex-col gap-2 relative overflow-x-auto lg:overflow-x-visible pb-2 lg:pb-0 custom-scrollbar">
+            {/* Persistent glowing track line — desktop only */}
+            <div className="absolute left-[18px] top-4 bottom-4 w-px bg-slate-800/80 rounded-full hidden lg:block" />
             
             {services.map((service, i) => {
               const isActive = i === activeIndex;
@@ -151,12 +151,12 @@ export const ServicesSection: React.FC = () => {
                   key={service.id}
                   onClick={() => setActiveIndex(i)}
                   onMouseEnter={() => setActiveIndex(i)}
-                  className={`relative flex items-center gap-4 p-4 rounded-2xl transition-all duration-300 text-left w-full group ${
+                  className={`relative flex items-center gap-2 lg:gap-4 px-3 py-2 lg:p-4 rounded-xl lg:rounded-2xl transition-all duration-300 text-left w-auto lg:w-full group shrink-0 ${
                     isActive ? "bg-[#0a192f] border border-[#112240]" : "hover:bg-white/[0.02] border border-transparent"
                   }`}
                 >
                   {/* Glowing Tracker Dot */}
-                  <div className="relative z-10 flex-shrink-0 w-2.5 h-2.5 rounded-full transition-all duration-500"
+                  <div className="relative z-10 flex-shrink-0 w-2 h-2 lg:w-2.5 lg:h-2.5 rounded-full transition-all duration-500"
                     style={{ 
                       background: isActive ? service.accent : '#1e293b',
                       boxShadow: isActive ? `0 0 12px ${service.accent}` : 'none',
@@ -165,7 +165,7 @@ export const ServicesSection: React.FC = () => {
                   />
 
                   <div className="relative z-10">
-                    <h3 className={`text-base font-800 transition-colors duration-300 ${isActive ? 'text-white' : 'text-slate-400 group-hover:text-slate-300'}`}>
+                    <h3 className={`text-xs sm:text-sm lg:text-base font-800 transition-colors duration-300 whitespace-nowrap lg:whitespace-normal ${isActive ? 'text-white' : 'text-slate-400 group-hover:text-slate-300'}`}>
                       {service.title}
                     </h3>
                   </div>
@@ -173,7 +173,7 @@ export const ServicesSection: React.FC = () => {
                   {isActive && (
                     <motion.div
                       layoutId="activeTabGlow"
-                      className="absolute inset-0 rounded-2xl opacity-10 pointer-events-none"
+                      className="absolute inset-0 rounded-xl lg:rounded-2xl opacity-10 pointer-events-none"
                       style={{ background: service.accent }}
                       initial={false}
                       transition={{ type: "spring", stiffness: 300, damping: 30 }}
@@ -193,7 +193,7 @@ export const ServicesSection: React.FC = () => {
                 animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
                 exit={{ opacity: 0, x: -10, filter: "blur(4px)" }}
                 transition={{ duration: 0.15, ease: "easeOut" }}
-                className="relative rounded-3xl bg-[#0a192f] border border-[#112240] shadow-2xl overflow-hidden min-h-[600px] flex flex-col"
+                className="relative rounded-2xl lg:rounded-3xl bg-[#0a192f] border border-[#112240] shadow-2xl overflow-hidden min-h-[420px] sm:min-h-[500px] lg:min-h-[600px] flex flex-col"
               >
                 {/* Monitor Top Bar */}
                 <div className="h-10 bg-[#06101f] border-b border-[#112240] flex items-center px-4 gap-2">
@@ -213,16 +213,16 @@ export const ServicesSection: React.FC = () => {
                   style={{ background: activeService.accent }}
                 />
 
-                <div className="p-8 md:p-12 flex-1 flex flex-col relative z-10">
-                  <div className="flex items-start justify-between mb-8">
+                <div className="p-5 sm:p-6 md:p-8 lg:p-12 flex-1 flex flex-col relative z-10">
+                  <div className="flex items-start justify-between mb-4 sm:mb-6 lg:mb-8">
                     <div>
-                      <div className="text-[11px] font-800 uppercase tracking-widest mb-3" style={{ color: activeService.accent }}>
+                      <div className="text-[10px] sm:text-[11px] font-800 uppercase tracking-widest mb-2 sm:mb-3" style={{ color: activeService.accent }}>
                         {activeService.category} Framework
                       </div>
-                      <h3 className="text-3xl md:text-4xl font-900 text-white tracking-tight mb-4">
+                      <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-900 text-white tracking-tight mb-2 sm:mb-4">
                         {activeService.title}
                       </h3>
-                      <p className="text-slate-400 text-lg leading-relaxed max-w-xl">
+                      <p className="text-slate-400 text-sm sm:text-base lg:text-lg leading-relaxed max-w-xl">
                         {activeService.description}
                       </p>
                     </div>
@@ -236,28 +236,28 @@ export const ServicesSection: React.FC = () => {
                   </div>
 
                   {/* Tech Details Grid */}
-                  <div className="mt-8">
-                    <h4 className="text-sm font-700 text-slate-300 mb-6 uppercase tracking-wider">Core Capabilities</h4>
-                    <div className="grid sm:grid-cols-2 gap-4">
+                  <div className="mt-4 sm:mt-6 lg:mt-8">
+                    <h4 className="text-xs sm:text-sm font-700 text-slate-300 mb-3 sm:mb-6 uppercase tracking-wider">Core Capabilities</h4>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4">
                       {activeService.details.map((detail, idx) => (
-                        <div key={idx} className="flex items-center gap-3 p-4 rounded-xl bg-[#020c1b]/50 border border-white/[0.03]">
-                          <div className="w-1.5 h-1.5 rounded-full" style={{ background: activeService.accent }} />
-                          <span className="text-sm font-600 text-slate-300">{detail}</span>
+                        <div key={idx} className="flex items-center gap-2 sm:gap-3 p-2.5 sm:p-4 rounded-lg sm:rounded-xl bg-[#020c1b]/50 border border-white/[0.03]">
+                          <div className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: activeService.accent }} />
+                          <span className="text-xs sm:text-sm font-600 text-slate-300">{detail}</span>
                         </div>
                       ))}
                     </div>
                   </div>
 
-                  <div className="mt-auto pt-12 flex items-center justify-between border-t border-[#112240]">
-                    <div className="flex items-center gap-4">
-                      <div className="w-8 h-8 rounded-full border border-slate-700 flex items-center justify-center">
-                        <div className="w-2 h-2 rounded-full animate-pulse" style={{ background: activeService.accent }} />
+                  <div className="mt-auto pt-6 sm:pt-8 lg:pt-12 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-t border-[#112240]">
+                    <div className="flex items-center gap-3 sm:gap-4">
+                      <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full border border-slate-700 flex items-center justify-center">
+                        <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full animate-pulse" style={{ background: activeService.accent }} />
                       </div>
-                      <span className="text-xs font-mono text-slate-500">System Ready. Awaiting Input...</span>
+                      <span className="text-[10px] sm:text-xs font-mono text-slate-500">System Ready. Awaiting Input...</span>
                     </div>
 
-                    <Link href={activeService.href} className="btn flex items-center gap-2 text-white font-bold px-6 py-2.5 rounded-lg transition-all" style={{ background: activeService.accent }}>
-                      Deploy Module <ArrowRight size={16} />
+                    <Link href={activeService.href} className="btn flex items-center gap-2 text-white font-bold px-4 sm:px-6 py-2 sm:py-2.5 rounded-lg transition-all text-xs sm:text-sm w-full sm:w-auto justify-center" style={{ background: activeService.accent }}>
+                      Deploy Module <ArrowRight size={14} className="sm:[&]:!w-4 sm:[&]:!h-4" />
                     </Link>
                   </div>
 
