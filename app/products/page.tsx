@@ -103,11 +103,11 @@ export default function ProductsPage() {
       );
     }
 
-    // Direct MP4 link / local file URL
-    const safeUrl = encodeURI(cleanUrl);
+    // Direct MP4 link / local file URL served via our backend API route
+    const apiUrl = `/api/videos/${selectedProduct.id}`;
     return (
       <video 
-        src={safeUrl}
+        src={apiUrl}
         controls
         autoPlay
         className="absolute inset-0 w-full h-full object-cover z-20"
