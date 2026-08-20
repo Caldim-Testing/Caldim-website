@@ -5,9 +5,9 @@ import productsData from "@/data/products.json";
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: { productId: string } }
+  { params }: { params: Promise<{ productId: string }> }
 ) {
-  const { productId } = params;
+  const { productId } = await params;
 
   // Find the product to get its video URL
   const product = productsData.find((p) => p.id === productId);
