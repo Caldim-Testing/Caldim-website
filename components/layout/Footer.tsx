@@ -174,7 +174,7 @@ export const Footer: React.FC = () => {
                     <span className="relative inline-flex rounded-full h-3 w-3 bg-blue-500"></span>
                   </span>
                   <h4 className="text-xs sm:text-sm font-900 text-white tracking-wide">
-                    CHENNAI — HEAD OFFICE
+                    INDIA — HEAD OFFICE
                   </h4>
                 </div>
                 <span className="text-[9px] sm:text-[10px] font-800 text-blue-200 bg-blue-600/30 border border-blue-400/50 px-2 sm:px-3 py-1 rounded-full uppercase tracking-wider shadow-sm">
@@ -209,7 +209,7 @@ export const Footer: React.FC = () => {
                     <span className="relative inline-flex rounded-full h-3 w-3 bg-blue-500"></span>
                   </span>
                   <h4 className="text-xs sm:text-sm font-900 text-white tracking-wide">
-                    HOSUR — BRANCH OFFICE
+                    INDIA — BRANCH OFFICE
                   </h4>
                 </div>
                 <span className="text-[9px] sm:text-[10px] font-800 text-blue-200 bg-blue-600/30 border border-blue-400/50 px-2 sm:px-3 py-1 rounded-full uppercase tracking-wider shadow-sm">

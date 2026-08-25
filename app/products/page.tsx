@@ -44,13 +44,15 @@ export default function ProductsPage() {
     }
   }, []);
 
-  // Update browser address bar dynamically without page reload
+  // Update browser address bar dynamically to clean path format (e.g. /products/calbuy) without ?
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const currentUrl = new URL(window.location.href);
-      if (currentUrl.searchParams.get("product") !== selectedId) {
-        currentUrl.searchParams.set("product", selectedId);
-        window.history.replaceState(null, "", currentUrl.pathname + currentUrl.search);
+      const targetPath = `/products/${selectedId}`;
+      if (window.location.pathname !== targetPath && !window.location.search) {
+        window.history.replaceState(null, "", targetPath);
+      } else if (window.location.search) {
+        // Clean up any remaining query params into clean route
+        window.history.replaceState(null, "", targetPath);
       }
     }
   }, [selectedId]);
