@@ -183,7 +183,7 @@ export const Footer: React.FC = () => {
               </div>
 
               <p className="text-xs sm:text-sm text-slate-100 leading-relaxed font-500 mb-4 pl-3.5 border-l-2 border-blue-400 relative z-10">
-                Minimac Center #118, First Floor, Arcot Road, Valasaravakkam, Chennai – 600087
+                Minimac Center #118, First Floor, Arcot Road, Valasaravakkam, TamilNadu, Chennai – 600087
               </p>
 
               <div className="flex items-center justify-between pt-3 border-t border-blue-500/20 text-xs relative z-10">
@@ -218,7 +218,7 @@ export const Footer: React.FC = () => {
               </div>
 
               <p className="text-xs sm:text-sm text-slate-100 leading-relaxed font-500 mb-4 pl-3.5 border-l-2 border-blue-400 relative z-10">
-                Plot No. 22, 23, 24, 2nd Floor, Durga Bhavani Towers, Thirsul Layout, Near RTO Check Post, NH 207, Bagalur Road, Hosur – 635103
+                Plot No. 22, 23, 24, 2nd Floor, Durga Bhavani Towers, Thirsul Layout, Near RTO Check Post, NH 207, Bagalur Road, TamilNadu, Hosur – 635103
               </p>
 
               <div className="flex items-center justify-between pt-3 border-t border-blue-500/20 text-xs relative z-10">
