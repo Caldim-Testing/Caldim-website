@@ -80,7 +80,7 @@ export default function ContactPage() {
                 Book a Scoping Call
               </h1>
               <p className="text-slate-900 font-600 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
-                Connect directly with our lead developers to scope your technical architecture, review requirements, and establish a clear deployment timeline.
+                Connect directly with our team to scope your technical architecture, review requirements, and establish a clear deployment timeline.
               </p>
             </FadeUp>
           </div>
@@ -118,7 +118,7 @@ export default function ContactPage() {
                           support@caldimengg.in
                         </a>
                         <div className="text-xs text-slate-900 mt-1.5 font-600 leading-relaxed">
-                          Bypass all forms and reach our lead architects directly for immediate scoping support.
+                          Bypass all forms and reach our team directly for immediate scoping support.
                         </div>
                       </div>
                     </div>
@@ -190,7 +190,7 @@ export default function ContactPage() {
                         Scoping Consultation Form
                       </h3>
                       <p className="text-xs text-slate-900 font-600 mt-1.5">
-                        Fill out the details below and a lead architect will reach out via email.
+                        Fill out the details below and our team will reach out via email.
                       </p>
                     </div>
                     
@@ -199,7 +199,7 @@ export default function ContactPage() {
                         <CheckCircle2 size={20} className="text-emerald-600 shrink-0 mt-0.5" />
                         <div>
                           <div className="font-800 text-emerald-950 mb-1">Request Successfully Sent!</div>
-                          Thank you! Your requirements have been received. A lead developer will email you shortly to confirm your scoping consultation schedule.
+                          Thank you! Your requirements have been received. Our team will email you shortly to confirm your scoping consultation schedule.
                         </div>
                       </div>
                     )}

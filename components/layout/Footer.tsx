@@ -70,11 +70,11 @@ export const Footer: React.FC = () => {
             {/* Direct Contact Links */}
             <div className="flex flex-col gap-2 pt-2">
               <a
-                href="mailto:support@caldimdas.com"
+                href="mailto:support@caldimengg.in"
                 className="flex items-center gap-2 text-xs text-slate-300 hover:text-blue-400 transition-colors"
               >
                 <Mail size={13} className="text-blue-400 shrink-0" />
-                <span>support@caldimdas.com</span>
+                <span>support@caldimengg.in</span>
               </a>
               <a
                 href="tel:+918925862845"

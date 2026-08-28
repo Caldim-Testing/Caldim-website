@@ -105,9 +105,14 @@ export default function AdminAnalyticsPage() {
       const res = await fetch("/api/track");
       if (res.ok) {
         const json = await res.json();
-        setData(json);
+        if (json && typeof json === "object" && (json.pageViews || json.logs)) {
+          setData(json);
+        } else {
+          setError("Received unexpected format from analytics API.");
+        }
       } else {
-        setError("Failed to fetch analytics logs.");
+        const errJson = await res.json().catch(() => ({}));
+        setError(errJson.error || "Failed to fetch analytics logs.");
       }
     } catch (err) {
       setError("Network error fetching statistics data.");
@@ -407,12 +412,26 @@ export default function AdminAnalyticsPage() {
             /* ========================================================================= */
             <>
               {error && (
-                <div className="p-4 mb-6 rounded-lg bg-red-50 border border-red-200 text-red-700 text-xs font-500">
-                  {error}
+                <div className="p-4 mb-6 rounded-xl bg-red-50 border border-red-200 text-red-700 text-xs font-500 flex items-center justify-between shadow-sm">
+                  <div className="flex items-center gap-2">
+                    <span className="font-bold">Error:</span>
+                    <span>{error}</span>
+                  </div>
+                  <button 
+                    onClick={fetchAnalytics}
+                    className="px-3 py-1.5 bg-red-600 hover:bg-red-700 text-white rounded-lg font-700 transition-colors shadow-sm"
+                  >
+                    Retry Loading
+                  </button>
                 </div>
               )}
 
-              {data ? (
+              {loading ? (
+                <div className="text-center py-24 text-[var(--text-muted)] text-sm flex flex-col items-center justify-center gap-3">
+                  <RefreshCw size={24} className="animate-spin text-blue-600" />
+                  <span className="font-600">Loading analytics dashboard data...</span>
+                </div>
+              ) : data ? (
                 <div className="grid lg:grid-cols-12 gap-8">
                   {/* Metrics Grid left */}
                   <div className="lg:col-span-8 flex flex-col gap-8">
@@ -432,22 +451,26 @@ export default function AdminAnalyticsPage() {
                         </button>
                       </div>
                       <div className="flex flex-col gap-4">
-                        {Object.entries(data.pageViews).map(([path, count]) => (
-                          <div key={path} className="flex flex-col gap-1.5">
-                            <div className="flex justify-between text-xs font-600 text-[var(--text-primary)]">
-                              <span>{path}</span>
-                              <span className="text-[var(--accent)] font-bold">{count} views</span>
+                        {Object.entries(data.pageViews || {}).length === 0 ? (
+                          <div className="text-xs text-[var(--text-muted)] italic">No page view data recorded.</div>
+                        ) : (
+                          Object.entries(data.pageViews || {}).map(([path, count]) => (
+                            <div key={path} className="flex flex-col gap-1.5">
+                              <div className="flex justify-between text-xs font-600 text-[var(--text-primary)]">
+                                <span>{path}</span>
+                                <span className="text-[var(--accent)] font-bold">{count} views</span>
+                              </div>
+                              <div className="w-full h-2 rounded-full bg-slate-100 overflow-hidden">
+                                <div 
+                                  className="h-full bg-[var(--accent)] rounded-full transition-all duration-500" 
+                                  style={{ 
+                                    width: `${Math.min(100, (count / Math.max(1, ...Object.values(data.pageViews || {}))) * 100)}%` 
+                                  }} 
+                                />
+                              </div>
                             </div>
-                            <div className="w-full h-2 rounded-full bg-slate-100 overflow-hidden">
-                              <div 
-                                className="h-full bg-[var(--accent)] rounded-full transition-all duration-500" 
-                                style={{ 
-                                  width: `${Math.min(100, (count / Math.max(1, ...Object.values(data.pageViews))) * 100)}%` 
-                                }} 
-                              />
-                            </div>
-                          </div>
-                        ))}
+                          ))
+                        )}
                       </div>
                     </FadeUp>
 
@@ -460,7 +483,7 @@ export default function AdminAnalyticsPage() {
                       <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
                         <div className="p-4 bg-slate-50 border border-slate-200 rounded-xl text-center">
                           <div className="text-2xl font-800 text-[var(--navy)] mb-1">
-                            {data.events.consultation_booked || 0}
+                            {data.events?.consultation_booked || 0}
                           </div>
                           <div className="text-[10px] font-700 text-[var(--text-muted)] uppercase tracking-wider">Consultations Booked</div>
                         </div>
@@ -477,7 +500,7 @@ export default function AdminAnalyticsPage() {
                       </h2>
                       
                       <div className="flex-1 overflow-y-auto flex flex-col gap-4 max-h-[400px] pr-2">
-                        {data.logs.length === 0 ? (
+                        {(!data.logs || data.logs.length === 0) ? (
                           <div className="text-center py-12 text-xs text-[var(--text-muted)] italic">
                             No logs recorded yet.
                           </div>
@@ -500,8 +523,14 @@ export default function AdminAnalyticsPage() {
                   </div>
                 </div>
               ) : (
-                <div className="text-center py-24 text-[var(--text-muted)] text-sm">
-                  Loading analytics dashboard data...
+                <div className="text-center py-16 text-[var(--text-muted)] text-sm flex flex-col items-center gap-3">
+                  <p className="font-500">Analytics telemetry data is currently unavailable.</p>
+                  <button 
+                    onClick={fetchAnalytics}
+                    className="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-lg text-xs font-700 transition-colors shadow-sm"
+                  >
+                    Reload Dashboard
+                  </button>
                 </div>
               )}
             </>

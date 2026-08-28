@@ -1,51 +1,219 @@
 {
   "pageViews": {
-    "/": 3,
-    "/about": 0,
-    "/services": 0,
-    "/products": 0,
-    "/contact": 0,
-    "/products/calbuy": 3,
-    "/products/calrims": 1
+    "/": 9,
+    "/about": 4,
+    "/services": 2,
+    "/products": 1,
+    "/contact": 8,
+    "/products/caltims": 2,
+    "/industries": 3,
+    "/admin": 3,
+    "/admin/login": 1,
+    "/admin/analytics": 3
   },
   "events": {
-    "consultation_booked": 0
+    "consultation_booked": 4
   },
   "logs": [
     {
-      "timestamp": "2026-08-20T11:13:09.833Z",
+      "timestamp": "2026-08-25T11:46:30.043Z",
       "action": "Page View",
-      "details": "/products/calbuy"
+      "details": "/products/caltims"
     },
     {
-      "timestamp": "2026-08-20T11:13:12.608Z",
+      "timestamp": "2026-08-25T11:46:31.698Z",
       "action": "Page View",
-      "details": "/products/calrims"
+      "details": "/contact"
     },
     {
-      "timestamp": "2026-08-20T11:13:27.789Z",
-      "action": "Page View",
-      "details": "/products/calbuy"
-    },
-    {
-      "timestamp": "2026-08-21T11:01:26.538Z",
-      "action": "Page View",
-      "details": "/products/calbuy"
-    },
-    {
-      "timestamp": "2026-08-25T08:48:53.675Z",
+      "timestamp": "2026-08-25T11:46:36.089Z",
       "action": "Page View",
       "details": "/"
     },
     {
-      "timestamp": "2026-08-25T08:49:15.633Z",
+      "timestamp": "2026-08-25T11:46:38.745Z",
+      "action": "Page View",
+      "details": "/about"
+    },
+    {
+      "timestamp": "2026-08-25T11:46:40.144Z",
+      "action": "Page View",
+      "details": "/services"
+    },
+    {
+      "timestamp": "2026-08-25T11:46:41.879Z",
+      "action": "Page View",
+      "details": "/products"
+    },
+    {
+      "timestamp": "2026-08-25T11:46:41.886Z",
+      "action": "Page View",
+      "details": "/products/caltims"
+    },
+    {
+      "timestamp": "2026-08-25T11:46:43.015Z",
+      "action": "Page View",
+      "details": "/industries"
+    },
+    {
+      "timestamp": "2026-08-25T11:46:43.814Z",
+      "action": "Page View",
+      "details": "/contact"
+    },
+    {
+      "timestamp": "2026-08-25T11:47:01.835Z",
+      "action": "Page View",
+      "details": "/contact"
+    },
+    {
+      "timestamp": "2026-08-25T11:48:18.696Z",
+      "action": "Page View",
+      "details": "/contact"
+    },
+    {
+      "timestamp": "2026-08-25T11:48:29.621Z",
+      "action": "Page View",
+      "details": "/about"
+    },
+    {
+      "timestamp": "2026-08-25T11:49:24.472Z",
+      "action": "Page View",
+      "details": "/about"
+    },
+    {
+      "timestamp": "2026-08-25T11:50:15.474Z",
       "action": "Page View",
       "details": "/"
     },
     {
-      "timestamp": "2026-08-25T08:58:19.949Z",
+      "timestamp": "2026-08-25T11:50:22.684Z",
       "action": "Page View",
       "details": "/"
+    },
+    {
+      "timestamp": "2026-08-25T11:50:26.455Z",
+      "action": "Page View",
+      "details": "/about"
+    },
+    {
+      "timestamp": "2026-08-25T11:50:33.126Z",
+      "action": "Page View",
+      "details": "/services"
+    },
+    {
+      "timestamp": "2026-08-25T11:50:42.957Z",
+      "action": "Page View",
+      "details": "/industries"
+    },
+    {
+      "timestamp": "2026-08-25T11:55:26.596Z",
+      "action": "Page View",
+      "details": "/industries"
+    },
+    {
+      "timestamp": "2026-08-27T13:16:55.922Z",
+      "action": "Page View",
+      "details": "/"
+    },
+    {
+      "timestamp": "2026-08-27T13:17:21.646Z",
+      "action": "Page View",
+      "details": "/"
+    },
+    {
+      "timestamp": "2026-08-27T13:17:34.269Z",
+      "action": "Page View",
+      "details": "/admin"
+    },
+    {
+      "timestamp": "2026-08-27T13:17:39.248Z",
+      "action": "Page View",
+      "details": "/admin"
+    },
+    {
+      "timestamp": "2026-08-27T13:19:21.830Z",
+      "action": "Page View",
+      "details": "/admin"
+    },
+    {
+      "timestamp": "2026-08-27T13:19:36.161Z",
+      "action": "Page View",
+      "details": "/admin/login"
+    },
+    {
+      "timestamp": "2026-08-27T13:20:02.467Z",
+      "action": "Page View",
+      "details": "/admin/analytics"
+    },
+    {
+      "timestamp": "2026-08-27T13:20:37.212Z",
+      "action": "Page View",
+      "details": "/admin/analytics"
+    },
+    {
+      "timestamp": "2026-08-27T13:20:44.688Z",
+      "action": "Page View",
+      "details": "/"
+    },
+    {
+      "timestamp": "2026-08-27T13:20:50.506Z",
+      "action": "Page View",
+      "details": "/contact"
+    },
+    {
+      "timestamp": "2026-08-27T13:22:54.071Z",
+      "action": "Page View",
+      "details": "/admin/analytics"
+    },
+    {
+      "timestamp": "2026-08-27T13:23:50.470Z",
+      "action": "Page View",
+      "details": "/contact"
+    },
+    {
+      "timestamp": "2026-08-27T13:24:11.145Z",
+      "action": "Page View",
+      "details": "/"
+    },
+    {
+      "timestamp": "2026-08-28T04:20:45.939Z",
+      "action": "Page View",
+      "details": "/"
+    },
+    {
+      "timestamp": "2026-08-28T06:20:01.473Z",
+      "action": "Page View",
+      "details": "/"
+    },
+    {
+      "timestamp": "2026-08-28T06:20:01.952Z",
+      "action": "Page View",
+      "details": "/contact"
+    },
+    {
+      "timestamp": "2026-08-28T06:43:50.502Z",
+      "action": "Consultation Request",
+      "details": "testing <testing@gmail.com> — Enterprise Web Applications"
+    },
+    {
+      "timestamp": "2026-08-28T06:43:56.151Z",
+      "action": "Event Trigger",
+      "details": "consultation_booked"
+    },
+    {
+      "timestamp": "2026-08-28T06:48:59.024Z",
+      "action": "Page View",
+      "details": "/contact"
+    },
+    {
+      "timestamp": "2026-08-28T06:49:17.577Z",
+      "action": "Consultation Request",
+      "details": "testing <testing@gmail.com> — Enterprise Web Applications"
+    },
+    {
+      "timestamp": "2026-08-28T06:49:21.889Z",
+      "action": "Event Trigger",
+      "details": "consultation_booked"
     }
   ]
 }

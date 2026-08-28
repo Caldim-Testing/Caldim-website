@@ -1,3 +1,6 @@
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 import { NextResponse } from "next/server";
 import { promises as fs } from "fs";
 import path from "path";
@@ -18,7 +21,20 @@ async function initData(): Promise<AnalyticsData> {
 
   try {
     const content = await fs.readFile(DATA_FILE, "utf-8");
-    return JSON.parse(content);
+    const parsed = JSON.parse(content);
+    return {
+      pageViews: parsed.pageViews || {
+        "/": 0,
+        "/about": 0,
+        "/services": 0,
+        "/products": 0,
+        "/contact": 0
+      },
+      events: parsed.events || {
+        "consultation_booked": 0
+      },
+      logs: Array.isArray(parsed.logs) ? parsed.logs : []
+    };
   } catch (e) {
     const initial: AnalyticsData = {
       pageViews: {
