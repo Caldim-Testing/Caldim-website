@@ -22,12 +22,7 @@ export async function GET() {
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { password, products } = body;
-
-    // Simple password validation matches login password
-    if (password !== "caldim2026") {
-      return NextResponse.json({ error: "Unauthorized access" }, { status: 401 });
-    }
+    const { products } = body;
 
     if (!Array.isArray(products)) {
       return NextResponse.json({ error: "Invalid products data format" }, { status: 400 });

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
 import { Play } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -38,10 +39,12 @@ export const LazyVideoEmbed: React.FC<LazyVideoEmbedProps> = ({
             className="absolute inset-0 w-full h-full cursor-pointer select-none"
           >
             {/* Thumbnail Image */}
-            <img
+            <Image
               src={thumbnailUrl}
               alt={title}
-              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+              fill
+              sizes="100vw"
+              className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
             />
 
             {/* Dark glass overlay */}

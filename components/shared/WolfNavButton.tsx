@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Home, Gamepad2, Cpu, Mail, X } from "lucide-react";
 import { GameCenter } from "./GameCenter";
@@ -247,9 +248,11 @@ export const WolfNavButton: React.FC = () => {
           ) : (
             <>
               <div className="absolute inset-0 bg-blue-500/20 rounded-full blur-md pointer-events-none" />
-              <img
+              <Image
                 src="/logo/image.png"
                 alt="CALDIM CD Logo"
+                width={32}
+                height={32}
                 className="h-8 w-auto max-w-none object-contain transition-transform duration-300 hover:scale-110 relative z-10"
               />
             </>

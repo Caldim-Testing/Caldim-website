@@ -54,24 +54,15 @@ export function CompanyCredentials() {
     setMounted(true);
   }, []);
 
-  // Lock background scroll whenever modal or fullscreen image is active
+  // Lock background scroll cleanly without resetting window scroll position
   useEffect(() => {
     if (selectedCredential || fullscreenImage) {
       document.body.style.overflow = "hidden";
-      document.body.style.height = "100vh";
-      document.body.style.touchAction = "none";
-      document.documentElement.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "";
-      document.body.style.height = "";
-      document.body.style.touchAction = "";
-      document.documentElement.style.overflow = "";
     }
     return () => {
       document.body.style.overflow = "";
-      document.body.style.height = "";
-      document.body.style.touchAction = "";
-      document.documentElement.style.overflow = "";
     };
   }, [selectedCredential, fullscreenImage]);
 
@@ -113,7 +104,7 @@ export function CompanyCredentials() {
                 <div className="flex flex-col sm:flex-row items-center gap-6 mb-6">
                   {/* Certificate Image Thumbnail */}
                   <div 
-                    onClick={() => setSelectedCredential(credentialsData[0])}
+                    onClick={() => setFullscreenImage("/credentials/duns-certificate.png")}
                     className="relative w-full sm:w-44 h-56 rounded-2xl overflow-hidden border border-blue-500/40 bg-slate-950 shadow-xl flex-shrink-0 cursor-pointer group/img flex items-center justify-center p-2"
                   >
                     <Image
@@ -124,8 +115,8 @@ export function CompanyCredentials() {
                     />
                     <div className="absolute inset-0 bg-blue-950/60 opacity-0 group-hover/img:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-[2px]">
                       <span className="bg-slate-900 text-white text-xs font-700 px-3 py-1.5 rounded-full shadow-lg border border-white/20 inline-flex items-center gap-1.5">
-                        <Eye className="w-3.5 h-3.5 text-blue-400" />
-                        Preview Document
+                        <Maximize2 className="w-3.5 h-3.5 text-blue-400" />
+                        Expand Certificate
                       </span>
                     </div>
                   </div>

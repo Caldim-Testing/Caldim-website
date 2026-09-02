@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -233,9 +234,11 @@ export const Navbar: React.FC = () => {
             >
               <div className="relative h-7 w-9 sm:h-8 sm:w-12 flex items-center justify-center shrink-0">
                 <div className="absolute inset-0 bg-blue-600/20 rounded-full blur-md group-hover:bg-blue-500/40 transition-all duration-500" />
-                <img
+                <Image
                   src="/logo/image.png"
                   alt="CALDIM CD Logo"
+                  width={32}
+                  height={32}
                   className="relative h-6 sm:h-7 w-auto max-w-none object-contain transition-transform duration-500 group-hover:scale-110"
                 />
               </div>

@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { FadeUp } from "@/components/animations/Animations";
@@ -32,6 +33,7 @@ export default function ProductsPage() {
   const [productsList, setProductsList] = useState<ProductItem[]>(staticProducts as ProductItem[]);
   const [selectedId, setSelectedId] = useState<string>("caltims");
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
+  const [imageError, setImageError] = useState<boolean>(false);
 
   // Sync initial product from URL search params (e.g. ?product=calbuy)
   useEffect(() => {
@@ -77,6 +79,7 @@ export default function ProductsPage() {
   // Reset video playback on product change
   useEffect(() => {
     setIsPlaying(false);
+    setImageError(false);
   }, [selectedId]);
 
   const selectedProduct = productsList.find((p) => p.id === selectedId) || productsList[0];
@@ -274,14 +277,13 @@ export default function ProductsPage() {
                         ) : (
                           <>
                             {/* Hookup / Poster Image */}
-                            <img 
-                              src={`/images/${selectedProduct.id}-poster.jpg`}
-                              onError={(e) => {
-                                e.currentTarget.onerror = null;
-                                e.currentTarget.src = selectedProduct.unsplashUrl;
-                              }}
+                            <Image 
+                              src={imageError ? selectedProduct.unsplashUrl : `/images/${selectedProduct.id}-poster.jpg`}
+                              onError={() => setImageError(true)}
                               alt={`${selectedProduct.name} Preview`}
-                              className="absolute inset-0 w-full h-full object-cover object-center opacity-60 group-hover:opacity-40 transition-all duration-700 pointer-events-none scale-105 group-hover:scale-100"
+                              fill
+                              sizes="(max-width: 768px) 100vw, 800px"
+                              className="object-cover object-center opacity-60 group-hover:opacity-40 transition-all duration-700 pointer-events-none scale-105 group-hover:scale-100"
                             />
                             
                             {/* Blueprint Grid & Simulated Waveforms inside Video Box */}

@@ -19,14 +19,22 @@ export default function AdminLoginPage() {
     setLoading(true);
     setError(null);
 
-    // Basic admin credential validation
-    if (username === "admin" && password === "caldim2026") {
-      // Store a simple local storage flag for visual verification.
-      // In production, use standard cookies and secure HTTP sessions.
-      localStorage.setItem("admin_auth", "true");
-      router.push("/admin/analytics");
-    } else {
-      setError("Invalid username or password. Please try again.");
+    try {
+      const res = await fetch("/api/admin/auth", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password }),
+      });
+
+      if (res.ok) {
+        router.push("/admin/analytics");
+      } else {
+        const data = await res.json().catch(() => ({}));
+        setError(data.error || "Invalid username or password. Please try again.");
+        setLoading(false);
+      }
+    } catch (err) {
+      setError("Network error logging in. Please try again.");
       setLoading(false);
     }
   }, [username, password, router]);

@@ -52,9 +52,11 @@ export const Footer: React.FC = () => {
             >
               <div className="relative h-9 w-14 flex items-center justify-center shrink-0">
                 <div className="absolute inset-0 bg-blue-600/20 rounded-full blur-md group-hover:bg-blue-500/40 transition-all duration-500" />
-                <img
+                <Image
                   src="/logo/image.png"
                   alt="CALDIM CD Logo"
+                  width={40}
+                  height={40}
                   className="relative h-8 w-auto max-w-none object-contain transition-transform duration-500 group-hover:scale-110"
                 />
               </div>

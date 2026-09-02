@@ -1,10 +1,10 @@
 {
   "pageViews": {
-    "/": 9,
-    "/about": 4,
-    "/services": 2,
+    "/": 15,
+    "/about": 8,
+    "/services": 3,
     "/products": 1,
-    "/contact": 8,
+    "/contact": 9,
     "/products/caltims": 2,
     "/industries": 3,
     "/admin": 3,
@@ -214,6 +214,66 @@
       "timestamp": "2026-08-28T06:49:21.889Z",
       "action": "Event Trigger",
       "details": "consultation_booked"
+    },
+    {
+      "timestamp": "2026-09-02T09:11:43.244Z",
+      "action": "Page View",
+      "details": "/"
+    },
+    {
+      "timestamp": "2026-09-02T09:11:55.170Z",
+      "action": "Page View",
+      "details": "/"
+    },
+    {
+      "timestamp": "2026-09-02T09:13:05.402Z",
+      "action": "Page View",
+      "details": "/about"
+    },
+    {
+      "timestamp": "2026-09-02T09:14:40.328Z",
+      "action": "Page View",
+      "details": "/services"
+    },
+    {
+      "timestamp": "2026-09-02T09:15:33.958Z",
+      "action": "Page View",
+      "details": "/about"
+    },
+    {
+      "timestamp": "2026-09-02T09:28:44.444Z",
+      "action": "Page View",
+      "details": "/"
+    },
+    {
+      "timestamp": "2026-09-02T09:30:26.896Z",
+      "action": "Page View",
+      "details": "/about"
+    },
+    {
+      "timestamp": "2026-09-02T09:30:34.791Z",
+      "action": "Page View",
+      "details": "/"
+    },
+    {
+      "timestamp": "2026-09-02T10:15:14.695Z",
+      "action": "Page View",
+      "details": "/about"
+    },
+    {
+      "timestamp": "2026-09-02T10:15:17.201Z",
+      "action": "Page View",
+      "details": "/"
+    },
+    {
+      "timestamp": "2026-09-02T10:15:24.004Z",
+      "action": "Page View",
+      "details": "/contact"
+    },
+    {
+      "timestamp": "2026-09-02T10:21:07.077Z",
+      "action": "Page View",
+      "details": "/"
     }
   ]
 }

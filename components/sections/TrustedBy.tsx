@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
 
 const partners = [
@@ -42,9 +43,11 @@ export const TrustedBy: React.FC = () => {
                   </span>
                 ) : (
                   /* Actual Image */
-                  <img 
+                  <Image 
                     src={partner.logo} 
                     alt={`${partner.name} logo`} 
+                    width={200}
+                    height={80}
                     className="h-full w-auto max-w-[200px] object-contain group-hover:scale-105 transition-transform duration-300"
                     onError={() => {
                       setFailedImages(prev => {

@@ -137,18 +137,17 @@ export default function AdminAnalyticsPage() {
   }, []);
 
   useEffect(() => {
-    const auth = localStorage.getItem("admin_auth");
-    if (auth !== "true") {
-      router.push("/admin/login");
-    } else {
-      setAuthorized(true);
-      fetchAnalytics();
-      fetchProducts();
-    }
-  }, [router, fetchAnalytics, fetchProducts]);
+    setAuthorized(true);
+    fetchAnalytics();
+    fetchProducts();
+  }, [fetchAnalytics, fetchProducts]);
 
-  const handleLogout = useCallback(() => {
-    localStorage.removeItem("admin_auth");
+  const handleLogout = useCallback(async () => {
+    try {
+      await fetch("/api/admin/auth", { method: "DELETE" });
+    } catch (e) {
+      console.error("Error during logout:", e);
+    }
     router.push("/admin/login");
   }, [router]);
 
@@ -292,7 +291,6 @@ export default function AdminAnalyticsPage() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          password: "caldim2026",
           products: updatedList
         })
       });
@@ -329,7 +327,6 @@ export default function AdminAnalyticsPage() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          password: "caldim2026",
           products: updatedList
         })
       });

@@ -7,12 +7,7 @@ export default function AdminIndexPage() {
   const router = useRouter();
 
   useEffect(() => {
-    const auth = localStorage.getItem("admin_auth");
-    if (auth === "true") {
-      router.replace("/admin/analytics");
-    } else {
-      router.replace("/admin/login");
-    }
+    router.replace("/admin/analytics");
   }, [router]);
 
   return (
