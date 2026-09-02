@@ -101,9 +101,9 @@ const HeroDashboard: React.FC = () => {
                 {/* Metric cards row */}
                 <div className="grid grid-cols-3 gap-1.5 sm:gap-3">
                   {[
-                    { label: "CALTIMS Sync", fullLabel: "CALTIMS Payroll", value: "99.8%", delta: "Automated Timesheets", color: "var(--accent-light)" },
-                    { label: "CALBUY Savings", fullLabel: "CALBUY Sourcing", value: "12%", delta: "Vendor Bidding", color: "#10B981" },
-                    { label: "CALRIMS Hiring", fullLabel: "CALRIMS Pipeline", value: "1,240", delta: "Candidates Audited", color: "#F59E0B" },
+                    { label: "CALTIMS Sync", fullLabel: "CALTIMS Payroll", value: "100%", delta: "Automated Timesheets", color: "var(--accent-light)" },
+                    { label: "CALBUY Savings", fullLabel: "CALBUY Sourcing", value: "100%", delta: "B2B Vendor Bidding", color: "#10B981" },
+                    { label: "CALRIMS Hiring", fullLabel: "CALRIMS Pipeline", value: "100%", delta: "AI Voice Audits", color: "#F59E0B" },
                   ].map((metric) => (
                     <div
                       key={metric.label}
@@ -172,9 +172,9 @@ const HeroDashboard: React.FC = () => {
                   </div>
                   <div className="flex flex-col gap-1.5">
                     {[
-                      { status: "CALBUY PO", msg: "PO #9912 generated: 15 Tons TMT Steel from primary vendor", color: "#10B981" },
-                      { status: "CALTIMS PAY", msg: "Processed monthly payroll for 480 workforce members", color: "var(--accent-light)" },
-                      { status: "CALRIMS HR", msg: "Voice screening completed for Lead Mechanical Engineer", color: "#F59E0B" },
+                      { status: "CALBUY PO", msg: "PO #3301 generated: Raw material & B2B procurement order processed", color: "#10B981" },
+                      { status: "CALTIMS PAY", msg: "Automated monthly timesheet & LOP payroll calculation executed", color: "var(--accent-light)" },
+                      { status: "CALRIMS HR", msg: "AI Voice screening completed for Senior Lead Engineering Candidate", color: "#F59E0B" },
                     ].map((log) => (
                       <div key={log.msg} className="flex items-center gap-2 text-[11px]">
                         <span
