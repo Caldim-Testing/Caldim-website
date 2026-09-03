@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://software.caldimengg.in';
+  const baseUrl = 'https://caldimproducts.com';
 
   const routes = [
     '',

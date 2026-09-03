@@ -24,7 +24,7 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://software.caldimengg.in"),
+  metadataBase: new URL("https://caldimproducts.com"),
   title: {
     default: "CALDIM-DAS — Enterprise Digital Solutions",
     template: "%s | CALDIM-DAS",
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_IN",
-    url: "https://software.caldimengg.in",
+    url: "https://caldimproducts.com",
     siteName: "CALDIM Software Division",
     title: "CALDIM Software Division — Enterprise Digital Solutions",
     description:
@@ -90,8 +90,8 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "Organization",
               name: "CALDIM Software Division",
-              url: "https://software.caldimengg.in",
-              logo: "https://software.caldimengg.in/logo.png",
+              url: "https://caldimproducts.com",
+              logo: "https://caldimproducts.com/logo.png",
               description:
                 "Enterprise software solutions and digital transformation services",
               contactPoint: {

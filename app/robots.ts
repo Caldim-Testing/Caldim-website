@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: ['/admin', '/api/admin'],
     },
-    sitemap: 'https://software.caldimengg.in/sitemap.xml',
+    sitemap: 'https://caldimproducts.com/sitemap.xml',
   };
 }
